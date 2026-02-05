@@ -1,0 +1,495 @@
+{
+    "states": [
+        {
+            "id": "has_array_length",
+            "type": "initial",
+            "label": "Có độ dài mảng n",
+            "description": "Người dùng đã nhập độ dài của mảng"
+        },
+        {
+            "id": "has_array",
+            "type": "initial",
+            "label": "Có mảng các phần tử",
+            "description": "Người dùng đã nhập mảng các phần tử"
+        },
+        {
+            "id": "has_number",
+            "type": "initial",
+            "label": "Có số để kiểm tra",
+            "description": "Người dùng đã nhập một số để kiểm tra"
+        },
+        {
+            "id": "has_string",
+            "type": "initial",
+            "label": "Có chuỗi để kiểm tra",
+            "description": "Người dùng đã nhập một chuỗi"
+        },
+        {
+            "id": "sort_order_set",
+            "type": "initial",
+            "label": "Thứ tự sắp xếp đã chọn",
+            "description": "Người dùng đã chọn thứ tự sắp xếp ('asc' hoặc 'desc')"
+        },
+        {
+            "id": "has_target_number",
+            "type": "initial",
+            "label": "Có số k để đếm",
+            "description": "Người dùng đã nhập số k để đếm trong mảng"
+        },
+
+        {
+            "id": "iterator_initialized",
+            "type": "intermediate",
+            "label": "Iterator vòng lặp khởi tạo",
+            "description": "Biến vòng lặp được khởi tạo để duyệt mảng"
+        },
+        {
+            "id": "loop_structure_created",
+            "type": "intermediate",
+            "label": "Cấu trúc vòng lặp tạo xong",
+            "description": "Cấu trúc vòng lặp đã được tạo"
+        },
+        {
+            "id": "current_element_loaded",
+            "type": "intermediate",
+            "label": "Phần tử hiện tại được tải",
+            "description": "Phần tử hiện tại của mảng được tải để xử lý"
+        },
+        {
+            "id": "element_compared",
+            "type": "intermediate",
+            "label": "Phần tử đã so sánh",
+            "description": "Phần tử hiện tại đã được so sánh để cập nhật max/min"
+        },
+
+        {
+            "id": "max_var_initialized",
+            "type": "intermediate",
+            "label": "Biến max khởi tạo",
+            "description": "Biến lưu giá trị lớn nhất được khởi tạo"
+        },
+        {
+            "id": "min_var_initialized",
+            "type": "intermediate",
+            "label": "Biến min khởi tạo",
+            "description": "Biến lưu giá trị nhỏ nhất được khởi tạo"
+        },
+        {
+            "id": "sum_var_initialized",
+            "type": "intermediate",
+            "label": "Biến sum khởi tạo",
+            "description": "Biến lưu tổng các phần tử được khởi tạo"
+        },
+        {
+            "id": "product_var_initialized",
+            "type": "intermediate",
+            "label": "Biến product khởi tạo",
+            "description": "Biến lưu tích các phần tử được khởi tạo"
+        },
+
+        {
+            "id": "bubble_loop_initialized",
+            "type": "intermediate",
+            "label": "Vòng lặp ngoài bubble sort khởi tạo",
+            "description": "Vòng lặp ngoài của Bubble Sort được khởi tạo"
+        },
+        {
+            "id": "bubble_loop_created",
+            "type": "intermediate",
+            "label": "Vòng lặp bubble sort tạo xong",
+            "description": "Cấu trúc vòng lặp Bubble Sort đã tạo"
+        },
+        {
+            "id": "bubble_two_elements_loaded",
+            "type": "intermediate",
+            "label": "Hai phần tử bubble sort tải",
+            "description": "Hai phần tử cạnh nhau được tải để so sánh"
+        },
+        {
+            "id": "bubble_elements_compared",
+            "type": "intermediate",
+            "label": "Hai phần tử bubble sort so sánh",
+            "description": "Hai phần tử được so sánh theo thứ tự sắp xếp"
+        },
+        {
+            "id": "bubble_elements_swapped",
+            "type": "intermediate",
+            "label": "Hai phần tử bubble sort hoán đổi",
+            "description": "Hai phần tử được hoán đổi nếu cần; mảng cập nhật"
+        },
+
+        {
+            "id": "count_initialized",
+            "type": "intermediate",
+            "label": "Biến đếm khởi tạo",
+            "description": "Biến đếm số phần tử bằng k được khởi tạo"
+        },
+        {
+            "id": "current_element_checked_for_count",
+            "type": "intermediate",
+            "label": "Phần tử kiểm tra đếm",
+            "description": "Phần tử hiện tại được kiểm tra để cập nhật count"
+        },
+
+        {
+            "id": "divisor_check_initialized",
+            "type": "intermediate",
+            "label": "Khởi tạo kiểm tra ước số",
+            "description": "Khởi tạo vòng lặp kiểm tra các ước số của số"
+        },
+        {
+            "id": "divisor_checked",
+            "type": "intermediate",
+            "label": "Kiểm tra ước số",
+            "description": "Kiểm tra từng ước số"
+        },
+        {
+            "id": "flag_set",
+            "type": "intermediate",
+            "label": "Cờ kết quả cập nhật",
+            "description": "Cập nhật cờ kết quả sau khi kiểm tra tất cả ước số"
+        },
+        {
+            "id": "prime_checked",
+            "type": "goal",
+            "label": "Kết quả số nguyên tố",
+            "description": "Kết quả kiểm tra số nguyên tố đã xác định"
+        },
+        {
+            "id": "perfect_checked",
+            "type": "goal",
+            "label": "Kết quả số hoàn hảo",
+            "description": "Kết quả kiểm tra số hoàn hảo đã xác định"
+        },
+
+        {
+            "id": "string_indices_initialized",
+            "type": "intermediate",
+            "label": "Khởi tạo chỉ số string check",
+            "description": "Khởi tạo chỉ số đầu và cuối để kiểm tra chuỗi"
+        },
+        {
+            "id": "chars_loaded",
+            "type": "intermediate",
+            "label": "Các ký tự hiện tại được tải",
+            "description": "Tải ký tự đầu và cuối để so sánh"
+        },
+        {
+            "id": "chars_compared",
+            "type": "intermediate",
+            "label": "Các ký tự so sánh",
+            "description": "So sánh các ký tự đối xứng trong chuỗi"
+        },
+        {
+            "id": "indices_updated",
+            "type": "intermediate",
+            "label": "Chỉ số đầu-cuối cập nhật",
+            "description": "Di chuyển chỉ số đầu lên, chỉ số cuối xuống sau khi so sánh"
+        },
+        {
+            "id": "string_flag_set",
+            "type": "intermediate",
+            "label": "Cờ string check cập nhật",
+            "description": "Cập nhật cờ kết quả sau khi so sánh tất cả ký tự"
+        },
+        {
+            "id": "string_checked",
+            "type": "goal",
+            "label": "Kết quả string check",
+            "description": "Kết quả kiểm tra chuỗi đã xác định"
+        },
+
+        {
+            "id": "max_found",
+            "type": "goal",
+            "label": "Giá trị lớn nhất tìm được",
+            "description": "Giá trị lớn nhất trong mảng đã được tìm thấy"
+        },
+        {
+            "id": "min_found",
+            "type": "goal",
+            "label": "Giá trị nhỏ nhất tìm được",
+            "description": "Giá trị nhỏ nhất trong mảng đã được tìm thấy"
+        },
+        {
+            "id": "sum_updated",
+            "type": "goal",
+            "label": "Tổng các phần tử tính xong",
+            "description": "Tổng các phần tử trong mảng đã được tính"
+        },
+        {
+            "id": "product_updated",
+            "type": "goal",
+            "label": "Tích các phần tử tính xong",
+            "description": "Tích các phần tử trong mảng đã được tính"
+        },
+        {
+            "id": "array_sorted",
+            "type": "goal",
+            "label": "Mảng đã sắp xếp",
+            "description": "Mảng đã được sắp xếp"
+        },
+        {
+            "id": "count_updated",
+            "type": "goal",
+            "label": "Số phần tử bằng k đã đếm xong",
+            "description": "Số phần tử bằng k đã được đếm"
+        }
+    ],
+    "steps": [
+        {
+            "id": "step_init_max",
+            "preconditions": ["has_array"],
+            "effects": ["max_var_initialized"],
+            "description": "Khởi tạo biến max để lưu giá trị lớn nhất"
+        },
+        {
+            "id": "step_init_min",
+            "preconditions": ["has_array"],
+            "effects": ["min_var_initialized"],
+            "description": "Khởi tạo biến min để lưu giá trị nhỏ nhất"
+        },
+        {
+            "id": "step_init_sum",
+            "preconditions": ["has_array"],
+            "effects": ["sum_var_initialized"],
+            "description": "Khởi tạo biến sum để tính tổng các phần tử"
+        },
+        {
+            "id": "step_init_product",
+            "preconditions": ["has_array"],
+            "effects": ["product_var_initialized"],
+            "description": "Khởi tạo biến product để tính tích các phần tử"
+        },
+        {
+            "id": "step_init_loop",
+            "preconditions": ["has_array_length"],
+            "effects": ["iterator_initialized"],
+            "description": "Khởi tạo iterator để duyệt mảng"
+        },
+        {
+            "id": "step_create_loop",
+            "preconditions": ["iterator_initialized"],
+            "effects": ["loop_structure_created"],
+            "description": "Tạo vòng lặp chính để xử lý các phần tử"
+        },
+        {
+            "id": "step_load_element",
+            "preconditions": ["loop_structure_created"],
+            "effects": ["current_element_loaded"],
+            "description": "Tải phần tử hiện tại để so sánh hoặc tính toán"
+        },
+        {
+            "id": "step_compare_element",
+            "preconditions": ["current_element_loaded"],
+            "effects": ["element_compared"],
+            "description": "So sánh phần tử với max hoặc min hiện tại"
+        },
+        {
+            "id": "step_update_max",
+            "preconditions": ["max_var_initialized", "element_compared"],
+            "effects": ["max_found"],
+            "description": "Cập nhật giá trị lớn nhất nếu cần"
+        },
+        {
+            "id": "step_update_min",
+            "preconditions": ["min_var_initialized", "element_compared"],
+            "effects": ["min_found"],
+            "description": "Cập nhật giá trị nhỏ nhất nếu cần"
+        },
+        {
+            "id": "step_update_sum",
+            "preconditions": ["sum_var_initialized", "current_element_loaded"],
+            "effects": ["sum_updated"],
+            "description": "Cộng phần tử hiện tại vào tổng"
+        },
+        {
+            "id": "step_update_product",
+            "preconditions": [
+                "product_var_initialized",
+                "current_element_loaded"
+            ],
+            "effects": ["product_updated"],
+            "description": "Nhân phần tử hiện tại vào tích"
+        },
+
+        {
+            "id": "step_init_bubble",
+            "preconditions": ["has_array_length"],
+            "effects": ["bubble_loop_initialized"],
+            "description": "Khởi tạo vòng lặp ngoài Bubble Sort"
+        },
+        {
+            "id": "step_create_bubble_loop",
+            "preconditions": ["bubble_loop_initialized"],
+            "effects": ["bubble_loop_created"],
+            "description": "Tạo vòng lặp chính Bubble Sort"
+        },
+        {
+            "id": "step_load_bubble_elements",
+            "preconditions": ["bubble_loop_created"],
+            "effects": ["bubble_two_elements_loaded"],
+            "description": "Tải hai phần tử liên tiếp để so sánh"
+        },
+        {
+            "id": "step_compare_bubble",
+            "preconditions": ["bubble_two_elements_loaded", "sort_order_set"],
+            "effects": ["bubble_elements_compared"],
+            "description": "So sánh hai phần tử theo thứ tự sắp xếp"
+        },
+        {
+            "id": "step_swap_bubble",
+            "preconditions": ["bubble_elements_compared"],
+            "effects": ["bubble_elements_swapped", "array_sorted"],
+            "description": "Hoán đổi hai phần tử nếu cần và cập nhật mảng"
+        },
+
+        {
+            "id": "step_init_count",
+            "preconditions": ["has_array"],
+            "effects": ["count_initialized"],
+            "description": "Khởi tạo biến count = 0 để lưu số lượng phần tử bằng k"
+        },
+        {
+            "id": "step_init_count_loop",
+            "preconditions": ["has_array_length"],
+            "effects": ["iterator_initialized"],
+            "description": "Khởi tạo biến i = 0 để duyệt mảng từ phần tử đầu tiên"
+        },
+        {
+            "id": "step_create_count_loop",
+            "preconditions": ["iterator_initialized"],
+            "effects": ["loop_structure_created"],
+            "description": "Tạo vòng lặp for/while để duyệt toàn bộ các phần tử trong mảng"
+        },
+        {
+            "id": "step_load_element_for_count",
+            "preconditions": ["loop_structure_created"],
+            "effects": ["current_element_checked_for_count"],
+            "description": "Lấy giá trị phần tử hiện tại a[i] để so sánh với k"
+        },
+        {
+            "id": "step_compare_element_with_k",
+            "preconditions": [
+                "current_element_checked_for_count",
+                "has_target_number"
+            ],
+            "effects": ["element_compared"],
+            "description": "So sánh phần tử hiện tại với giá trị k"
+        },
+        {
+            "id": "step_increment_count",
+            "preconditions": ["element_compared"],
+            "effects": ["count_updated"],
+            "description": "Nếu phần tử bằng k thì tăng biến count lên 1"
+        },
+
+        {
+            "id": "step_init_divisor_check",
+            "preconditions": ["has_number"],
+            "effects": ["divisor_check_initialized"],
+            "description": "Khởi tạo vòng lặp kiểm tra ước số"
+        },
+        {
+            "id": "step_check_divisor",
+            "preconditions": ["divisor_check_initialized"],
+            "effects": ["divisor_checked"],
+            "description": "Kiểm tra từng ước số"
+        },
+        {
+            "id": "step_set_flag",
+            "preconditions": ["divisor_checked"],
+            "effects": ["flag_set"],
+            "description": "Cập nhật cờ kết quả sau khi kiểm tra tất cả ước số"
+        },
+        {
+            "id": "step_final_prime_check",
+            "preconditions": ["flag_set"],
+            "effects": ["prime_checked"],
+            "description": "Xác định kết quả số nguyên tố"
+        },
+        {
+            "id": "step_final_perfect_check",
+            "preconditions": ["flag_set"],
+            "effects": ["perfect_checked"],
+            "description": "Xác định kết quả số hoàn hảo"
+        },
+
+        {
+            "id": "step_init_string_indices",
+            "preconditions": ["has_string"],
+            "effects": ["string_indices_initialized"],
+            "description": "Khởi tạo chỉ số đầu và cuối để kiểm tra chuỗi"
+        },
+        {
+            "id": "step_load_chars",
+            "preconditions": ["string_indices_initialized"],
+            "effects": ["chars_loaded"],
+            "description": "Tải ký tự đầu và cuối"
+        },
+        {
+            "id": "step_compare_chars",
+            "preconditions": ["chars_loaded"],
+            "effects": ["chars_compared"],
+            "description": "So sánh ký tự đầu và cuối"
+        },
+        {
+            "id": "step_update_indices",
+            "preconditions": ["chars_compared"],
+            "effects": ["indices_updated"],
+            "description": "Di chuyển chỉ số đầu lên, chỉ số cuối xuống"
+        },
+        {
+            "id": "step_set_string_flag",
+            "preconditions": ["indices_updated"],
+            "effects": ["string_flag_set"],
+            "description": "Cập nhật cờ kết quả sau khi so sánh tất cả ký tự"
+        },
+        {
+            "id": "step_final_string_check",
+            "preconditions": ["string_flag_set"],
+            "effects": ["string_checked"],
+            "description": "Xác định kết quả kiểm tra chuỗi"
+        }
+    ],
+    "PROBLEMS": [
+        {
+            "id": "problem_find_max",
+            "title": "Tìm giá trị lớn nhất trong mảng",
+            "initial_states": ["has_array_length", "has_array"],
+            "goal": "max_found"
+        },
+        {
+            "id": "problem_sum_array",
+            "title": "Tính tổng các phần tử trong mảng",
+            "initial_states": ["has_array_length", "has_array"],
+            "goal": "sum_updated"
+        },
+        {
+            "id": "problem_bubble_sort_asc",
+            "title": "Sắp xếp mảng tăng dần (bubble sort)",
+            "initial_states": [
+                "has_array_length",
+                "has_array",
+                "sort_order_set"
+            ],
+            "goal": "array_sorted"
+        },
+        {
+            "id": "problem_string_check",
+            "title": "Kiểm tra chuỗi (ví dụ palindrome)",
+            "initial_states": ["has_string"],
+            "goal": "string_checked"
+        },
+        {
+            "id": "problem_count_equal_k",
+            "title": "Đếm số phần tử bằng k trong mảng",
+            "initial_states": [
+                "has_array_length",
+                "has_array",
+                "has_target_number"
+            ],
+            "goal": "count_updated"
+        }
+    ]
+}

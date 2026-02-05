@@ -1,0 +1,30 @@
+{
+    "type": 1,
+    "status": "success",
+    "steps": [
+        {
+            "id": "step_init_string_indices",
+            "description": "Khởi tạo chỉ số đầu và cuối để kiểm tra chuỗi"
+        },
+        {
+            "id": "step_load_chars",
+            "description": "Tải ký tự đầu và cuối"
+        },
+        {
+            "id": "step_compare_chars",
+            "description": "So sánh ký tự đầu và cuối"
+        },
+        {
+            "id": "step_update_indices",
+            "description": "Di chuyển chỉ số đầu lên, chỉ số cuối xuống"
+        },
+        {
+            "id": "step_set_string_flag",
+            "description": "Cập nhật cờ kết quả sau khi so sánh tất cả ký tự"
+        },
+        {
+            "id": "step_final_string_check",
+            "description": "Xác định kết quả kiểm tra chuỗi"
+        }
+    ]
+}

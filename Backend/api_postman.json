@@ -1,0 +1,334 @@
+{
+    "info": {
+        "_postman_id": "c6a1b7a2-f8c7-4b1e-8e4a-9c7f3d6b0d1a",
+        "name": "CodePal API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Problems",
+            "item": [
+                {
+                    "name": "Get Problems (Filter)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/problem?topicId=1&minDiff=2&maxDiff=5",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "problem"],
+                            "query": [
+                                {
+                                    "key": "topicId",
+                                    "value": "1",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "minDiff",
+                                    "value": "2",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "maxDiff",
+                                    "value": "5",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "title",
+                                    "value": "array",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "source",
+                                    "value": "LeetCode",
+                                    "disabled": true
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Problem by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/problem/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "problem", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Problem",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"problemTitle\": \"Bài tập Mảng Mới\",\r\n  \"difficulty\": \"Easy\",\r\n  \"link\": \"http://example.com/new\",\r\n  \"source\": \"LeetCode\",\r\n  \"topicIds\": [\r\n    1,\r\n    2\r\n  ]\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/problem",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "problem"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Problem",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"problemTitle\": \"Bài tập Mảng (Đã sửa)\",\r\n  \"difficulty\": \"Medium\",\r\n  \"topicIds\": [\r\n    1\r\n  ]\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/problem/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "problem", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Problem",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/problem/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "problem", "1"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Checklist",
+            "item": [
+                {
+                    "name": "Get My Checklist",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/checklist",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "checklist"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add To Checklist",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"status\": \"NotStarted\",\r\n  \"problemId\": 1\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/checklist",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "checklist"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Checklist Status",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"status\": \"Completed\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/checklist/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "checklist", "1"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove From Checklist",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/checklist/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "checklist", "1"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Topics",
+            "item": [
+                {
+                    "name": "Get All Topics",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/topic",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "topic"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Topic",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"name\": \"Dynamic Programming\",\r\n  \"description\": \"Các bài tập về quy hoạch động\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/topic",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "topic"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "AI Helper",
+            "item": [
+                {
+                    "name": "Analyze Code",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"userInputCode\": \"def hello():\\n  print(\\\"Hello World)\",\r\n  \"problemId\": 1\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/ai/analyze",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "ai", "analyze"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Search History",
+            "item": [
+                {
+                    "name": "Get My Search History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/searchhistory",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "searchhistory"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete History Item",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/searchhistory/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "searchhistory", "1"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5058",
+            "type": "string"
+        }
+    ]
+}

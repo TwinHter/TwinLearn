@@ -1,0 +1,19 @@
+{
+    "status": "Error",
+    "errors": [
+        {
+            "line": 5,
+            "level": "SYNTAX",
+            "message": "Thiếu dấu chấm phẩy ';'",
+            "fix": "Trong C++, câu lệnh thường phải kết thúc bằng dấu chấm phẩy. Hãy kiểm tra cuối dòng lệnh hiện tại hoặc dòng ngay phía trên.",
+            "raw": "temp_check.cpp:5:14: error: expected ';' at end of declaration"
+        },
+        {
+            "line": 8,
+            "level": "SYNTAX",
+            "message": "Cố tình thay đổi giá trị của hằng số 'c''",
+            "fix": "Biến 'c'' được khai báo là 'const' (chỉ đọc/hằng số). Bạn chỉ được gán giá trị cho nó một lần lúc khởi tạo, không thể thay đổi sau đó.",
+            "raw": "temp_check.cpp:8:7: error: cannot assign to variable 'c' with const-qualified type 'const int'"
+        }
+    ]
+}

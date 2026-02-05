@@ -1,0 +1,67 @@
+1 . Các state:
+{
+    id: "",
+    title: "",
+    description: ""
+}
+VD: 
+{
+    id: "has_array_length",
+    label: "Có độ dài mảng n",
+    description: "Biến độ dài mảng n đã được khởi tạo và có giá trị hợp lệ.",
+    type: "initial"
+}
+
+2. Các step: 
+{
+    id: "",
+    description: "",
+    preconditions: [""],
+    effects: [""]
+}
+
+3. Các problems: Định nghĩa trước một vài bài toán 
+{
+    id: "",
+    title: "",
+    initial_states: [""],
+    goal: [""]
+}
+VD: {
+    id: "problem_find_max",
+    title: "Tìm giá trị lớn nhất trong mảng",
+    initial_states: [
+        "has_array_length",
+        "has_array"
+    ],
+    goal: [
+        "max_found"
+    ]
+}
+
+
+4. Định dạng request đến code:
+type = 1: task in ra steps để đạt được goal từ initial_state
+type = 2: nhận vào initial state, goal và steps từ user, kiểm tra tính hợp lệ của steps
+{
+    type: (1 hoặc 2),
+    initial_state: [""],
+    goal: "",
+    steps: [""] (nếu type = 2)
+}
+
+5. Định dạng output của code:
+{
+    type = 1,
+    steps: [{
+        id: "",
+        description: ""
+    }, ...],
+    status: "success" hoặc "fail",
+}
+or 
+{
+    type = 2,
+    status: "success", "missing step", "fail"
+    detail: "" 
+}

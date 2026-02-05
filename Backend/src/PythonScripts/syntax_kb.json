@@ -1,0 +1,443 @@
+[
+    {
+        "id": "SYN_MISSING_SEMI",
+        "pattern": "expected\\s*['\"]?[;]['\"]?\\s*(before|after|at end)",
+        "type": "SYNTAX",
+        "msg": "Thiếu dấu chấm phẩy ';'",
+        "fix": "Trong C++, câu lệnh thường phải kết thúc bằng dấu chấm phẩy. Hãy kiểm tra cuối dòng lệnh hiện tại hoặc dòng ngay phía trên."
+    },
+    {
+        "id": "SYN_UNDECLARED_VAR",
+        "pattern": "['\"]?(.+)['\"]?\\s*was not declared*",
+        "type": "SYNTAX",
+        "msg": "Biến chưa được khai báo",
+        "fix": "Bạn đang dùng biến '{1}' nhưng máy tính chưa biết nó là gì. Hãy kiểm tra lại lỗi chính tả hoặc thêm dòng khai báo (ví dụ: int {1};)."
+    },
+    {
+        "id": "SYN_UNDECLARED_VAR",
+        "pattern": "error: use of undeclared identifier ['\"]?(.+)['\"]*",
+        "type": "SYNTAX",
+        "msg": "Biến chưa được khai báo",
+        "fix": "Bạn đang dùng biến '{1}' nhưng máy tính chưa biết nó là gì. Hãy kiểm tra lại lỗi chính tả hoặc thêm dòng khai báo (ví dụ: int {1};)."
+    },
+    {
+        "id": "SYN_MISSING_BRACE_CLOSE",
+        "pattern": "expected\\s*['\"]?\\}['\"]?\\s*",
+        "type": "SYNTAX",
+        "msg": "Thiếu dấu đóng ngoặc nhọn '}'",
+        "fix": "Chương trình kết thúc đột ngột. Có thể bạn đã mở hàm main, if, for... bằng '{' nhưng quên đóng lại bằng '}'. Hãy kiểm tra và đóng dấu ngoặc"
+    },
+    {
+        "id": "WAR_STACK_ADDR_RETURN",
+        "pattern": "warning: address of stack memory associated with local variable ['\"]?(.+)['\"]? *",
+        "type": "SYNTAX",
+        "msg": "Warning: Trả về địa chỉ biến cục bộ",
+        "fix": "Nguy hiểm: Biến cục bộ sẽ bị hủy khi hàm kết thúc. Đừng return con trỏ hoặc tham chiếu tới nó. Hãy dùng cấp phát động (new) hoặc biến toàn cục."
+    },
+    {
+        "id": "SYN_MISSING_PAREN_CLOSE",
+        "pattern": "expected\\s*['\"]?\\)['\"]?\\s*(before|after)",
+        "type": "SYNTAX",
+        "msg": "Thiếu dấu đóng ngoặc tròn ')'",
+        "fix": "Kiểm tra các biểu thức điều kiện if(...), while(...) hoặc for(...) xem đã đóng ngoặc đầy đủ chưa. Hãy thêm dấu ')' còn thiếu."
+    },
+    {
+        "id": "SYN_MAIN_TYPE",
+        "pattern": "::main\\s*must return\\s*['\"]?int['\"]?",
+        "type": "SYNTAX",
+        "msg": "Hàm main khai báo sai kiểu",
+        "fix": "Theo chuẩn C++, hàm main bắt buộc phải trả về 'int'. Hãy sửa 'void main()' thành 'int main()' và thêm 'return 0;' ở cuối. "
+    },
+    {
+        "id": "SYN_INCLUDE_ERR",
+        "pattern": "(fatal error|no such file).*['\"](.+)['\"]",
+        "type": "SYNTAX",
+        "msg": "Không tìm thấy thư viện",
+        "fix": "Trình biên dịch không tìm thấy file '{2}'. Hãy kiểm tra chính tả (ví dụ: iostream, vector, cmath) và đảm bảo dùng dấu < >. "
+    },
+    {
+        "id": "SYN_STD_MISSING",
+        "pattern": "(cout|cin|endl|string|vector)\\s*was not declared",
+        "type": "SYNTAX",
+        "msg": "Thiếu không gian tên std",
+        "fix": "Máy tính không hiểu lệnh này. Hãy thêm 'using namespace std;' sau các dòng #include hoặc dùng 'std::{1}'. "
+    },
+    {
+        "id": "SYN_REDEFINITION",
+        "pattern": "redefinition of\\s*['\"](.+)['\"]",
+        "type": "SYNTAX",
+        "msg": "Khai báo trùng tên biến/hàm",
+        "fix": "Bạn đã khai báo '{1}' hai lần trong cùng một phạm vi. Hãy xóa bớt một dòng hoặc đổi tên khác. "
+    },
+    {
+        "id": "SYN_NOT_DECLARED_TYPE",
+        "pattern": "C\\+\\+\\s*requires a type specifier",
+        "type": "SYNTAX",
+        "msg": "Khai báo thiếu kiểu dữ liệu",
+        "fix": "Khi khai báo biến hoặc hàm, bạn phải chỉ rõ kiểu dữ liệu (ví dụ: int, float)."
+    },
+    {
+        "id": "SYN_NO_MATCH_FUNC",
+        "pattern": "no matching function for call to\\s*['\"]?(.+)['\"]?",
+        "type": "SYNTAX",
+        "msg": "Gọi hàm sai tham số",
+        "fix": "Hàm '{1}' không chấp nhận các tham số bạn truyền vào. Hãy kiểm tra lại số lượng và kiểu dữ liệu của các tham số. "
+    },
+    {
+        "id": "SYN_PRIMARY_EXP",
+        "pattern": "expected primary-expression before",
+        "type": "SYNTAX",
+        "msg": "Lỗi cú pháp thừa ký tự",
+        "fix": "Thường do gõ thừa ký tự lạ, hoặc thiếu toán hạng trong biểu thức. Ví dụ: 'int x = ;' hoặc 'if(x > )'. Hãy kiểm tra lại dòng này."
+    },
+    {
+        "id": "SYN_STRAY_CHAR",
+        "pattern": "stray\\s*['\\\\]\\d+['\"]?\\s*in program",
+        "type": "SYNTAX",
+        "msg": "Ký tự lạ trong code",
+        "fix": "Có thể bạn đã copy-paste code từ web chứa ký tự ẩn hoặc dùng bộ gõ tiếng Việt (Unicode) để gõ code. Hãy xóa và gõ lại dòng này. "
+    },
+    {
+        "id": "SYN_INVALID_TYPE",
+        "pattern": "does not name a type",
+        "type": "SYNTAX",
+        "msg": "Tên kiểu dữ liệu sai",
+        "fix": "Trình biên dịch không nhận ra kiểu dữ liệu này. Có thể do lỗi chính tả (ví dụ: 'Int' thay vì 'int') hoặc thiếu thư viện. "
+    },
+    {
+        "id": "SYN_TOO_FEW_ARGS",
+        "pattern": "too few arguments to function",
+        "type": "SYNTAX",
+        "msg": "Truyền thiếu tham số cho hàm",
+        "fix": "Hàm này yêu cầu nhiều tham số hơn số lượng bạn đã truyền vào. Hãy kiểm tra lại khai báo hàm. "
+    },
+    {
+        "id": "WARN_UNUSED_PARAM",
+        "pattern": "unused parameter ['\"]?(.+)['\"]?",
+        "type": "WARNING",
+        "msg": "Tham số hàm '{1}' bị thừa (không sử dụng)",
+        "fix": "Bạn đã khai báo tham số '{1}' cho hàm này nhưng không hề sử dụng nó bên trong. Hãy xóa nó đi nếu không cần thiết để code gọn gàng hơn."
+    },
+    {
+        "id": "SYN_TOO_MANY_ARGS",
+        "pattern": "too many arguments to function",
+        "type": "SYNTAX",
+        "msg": "Truyền thừa tham số cho hàm",
+        "fix": "Bạn đang truyền quá nhiều tham số. Hãy xóa bớt các tham số không cần thiết. "
+    },
+    {
+        "id": "SYN_INVALID_CONVERSION",
+        "pattern": "invalid conversion from\\s*['\"]?(.+)['\"]?\\s*to\\s*['\"]?(.+)['\"]?",
+        "type": "SYNTAX",
+        "msg": "Lỗi chuyển đổi kiểu dữ liệu",
+        "fix": "Không thể tự động chuyển từ kiểu '{1}' sang '{2}'. Hãy ép kiểu thủ công hoặc kiểm tra lại logic. "
+    },
+    {
+        "id": "SYN_CONST_ASSIGN",
+        "pattern": "cannot assign to variable ['\"]?(.+)['\"]? with const-qualified type",
+        "type": "SYNTAX",
+        "msg": "Cố tình thay đổi giá trị của hằng số '{1}'",
+        "fix": "Biến '{1}' được khai báo là 'const' (chỉ đọc/hằng số). Bạn chỉ được gán giá trị cho nó một lần lúc khởi tạo, không thể thay đổi sau đó."
+    },
+    {
+        "id": "SYN_CONST_ASSIGN",
+        "pattern": "assignment of read-only",
+        "type": "SYNTAX",
+        "msg": "Gán giá trị cho hằng số (const)",
+        "fix": "Biến này được khai báo là 'const' (chỉ đọc), bạn không thể thay đổi giá trị của nó sau khi khởi tạo. "
+    },
+    {
+        "id": "SYN_LVALUE_REQ",
+        "pattern": "lvalue required as left operand",
+        "type": "SYNTAX",
+        "msg": "Gán giá trị sai vế",
+        "fix": "Vế trái của phép gán phải là một biến (ví dụ: 'x = 5'), không được là một giá trị hoặc biểu thức (ví dụ: '5 = x' hoặc 'x+1 = y' là sai)."
+    },
+    {
+        "id": "SYN_NOT_A_FUNC",
+        "pattern": "called object .* is not a function",
+        "type": "SYNTAX",
+        "msg": "Gọi biến như một hàm",
+        "fix": "Bạn đang dùng dấu ngoặc tròn '()' sau một tên biến không phải là hàm. Kiểm tra xem có trùng tên biến với tên hàm không."
+    },
+    {
+        "id": "SYN_SUB_NON_PTR",
+        "pattern": "subscripted value is neither array nor pointer",
+        "type": "SYNTAX",
+        "msg": "Dùng chỉ số [] cho biến thường",
+        "fix": "Bạn đang dùng cú pháp 'a[i]' nhưng 'a' không phải là mảng hoặc con trỏ. Kiểm tra lại khai báo biến 'a'."
+    },
+    {
+        "id": "SYN_MEMBER_REQ",
+        "pattern": "request for member .* in .*, which is of non-class",
+        "type": "SYNTAX",
+        "msg": "Truy cập sai thuộc tính",
+        "fix": "Bạn đang dùng dấu chấm '.' hoặc mũi tên '->' trên một biến cơ bản (int, float...). Cú pháp này chỉ dùng cho Struct hoặc Class."
+    },
+    {
+        "id": "SYN_JUMP_CROSS",
+        "pattern": "jump to label .* crosses initialization",
+        "type": "SYNTAX",
+        "msg": "Lệnh goto/switch bỏ qua khởi tạo biến",
+        "fix": "Bạn đang nhảy qua một dòng khởi tạo biến. Hãy đặt khối lệnh `{ }` bao quanh vùng khai báo biến trong case/goto."
+    },
+    {
+        "id": "SYN_BREAK_OUT",
+        "pattern": "break statement not within loop",
+        "type": "SYNTAX",
+        "msg": "Lệnh break nằm ngoài vòng lặp/switch",
+        "fix": "Lệnh 'break' chỉ được dùng bên trong 'for', 'while', 'do-while' hoặc 'switch'. Hãy xóa nó hoặc di chuyển vào trong."
+    },
+    {
+        "id": "SYN_CONTINUE_OUT",
+        "pattern": "continue statement not within loop",
+        "type": "SYNTAX",
+        "msg": "Lệnh continue nằm ngoài vòng lặp",
+        "fix": "Lệnh 'continue' chỉ được dùng bên trong các vòng lặp ('for', 'while'). Nó không dùng cho 'switch' hay hàm."
+    },
+    {
+        "id": "SYN_CASE_OUT",
+        "pattern": "case label not within a switch",
+        "type": "SYNTAX",
+        "msg": "Lệnh case nằm ngoài switch",
+        "fix": "Lệnh 'case' chỉ có ý nghĩa bên trong khối lệnh của 'switch'. Hãy kiểm tra lại dấu ngoặc nhọn của switch."
+    },
+    {
+        "id": "SYN_VLA_FORBIDDEN",
+        "pattern": "ISO C\\+\\+ forbids variable length array",
+        "type": "SYNTAX",
+        "msg": "Mảng kích thước động không chuẩn",
+        "fix": "C++ chuẩn không cho phép khai báo 'int a[n]' với n là biến. Hãy dùng 'std::vector' hoặc cấp phát động 'new int[n]'."
+    },
+    {
+        "id": "LOG_ASSIGN_IN_IF",
+        "pattern": "suggest parentheses around assignment used as truth value",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Phép gán trong điều kiện IF",
+        "fix": "Bạn đang dùng '=' (gán) trong 'if'. Có phải ý bạn là '==' (so sánh bằng)? Ví dụ: sửa 'if (x=5)' thành 'if (x==5)'."
+    },
+    {
+        "id": "LOG_EMPTY_BODY",
+        "pattern": "suggest braces around empty body",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Vòng lặp hoặc If rỗng",
+        "fix": "Lệnh if/else/loop này không thực hiện gì cả. Có thể do bạn đặt thừa dấu ';' ngay sau điều kiện."
+    },
+    {
+        "id": "LOG_SIGN_COMPARE",
+        "pattern": "comparison between signed and unsigned",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: So sánh khác kiểu (Signed vs Unsigned)",
+        "fix": "Bạn đang so sánh số nguyên có dấu (int) với số không dấu (size_t, unsigned). Hãy cẩn thận hoặc ép kiểu để tránh lỗi logic khi số âm xuất hiện."
+    },
+    {
+        "id": "LOG_NO_RETURN",
+        "pattern": "no return statement in function returning non-void",
+        "type": "LOGIC",
+        "msg": "Hàm thiếu lệnh return",
+        "fix": "Hàm này khai báo trả về dữ liệu nhưng lại kết thúc mà không có 'return'. Điều này sẽ gây lỗi rác bộ nhớ."
+    },
+    {
+        "id": "LOG_UNREACHABLE",
+        "pattern": "will never be executed",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Code không bao giờ chạy (Unreachable)",
+        "fix": "Đoạn code này nằm sau lệnh return/break/continue nên sẽ không bao giờ được thực thi. Hãy kiểm tra lại luồng xử lý."
+    },
+    {
+        "id": "LOG_DIV_ZERO",
+        "pattern": "division by zero",
+        "type": "LOGIC",
+        "msg": "Lỗi chia cho số 0",
+        "fix": "Phát hiện phép chia cho hằng số 0. Điều này chắc chắn gây crash chương trình. Hãy sửa mẫu số."
+    },
+    {
+        "id": "LOG_UNUSED_VAR",
+        "pattern": "unused variable",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Biến thừa",
+        "fix": "Biến này được khai báo nhưng không bao giờ được sử dụng. Hãy xóa nó đi cho code gọn gàng."
+    },
+    {
+        "id": "LOG_PRECEDENCE",
+        "pattern": "suggest parentheses around .* operator",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Thứ tự ưu tiên toán tử",
+        "fix": "Thứ tự thực hiện các phép toán (&&, ||, +, <<) có thể gây hiểu nhầm. Hãy dùng ngoặc đơn '()' để nhóm các biểu thức rõ ràng hơn."
+    },
+    {
+        "id": "LOG_FLOAT_EQ",
+        "pattern": "comparing floating point with == or !=",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: So sánh bằng với số thực",
+        "fix": "So sánh '==' với số thực (float/double) thường không chính xác. Hãy so sánh độ chênh lệch: 'abs(a - b) < epsilon'."
+    },
+    {
+        "id": "LOG_EFFECT",
+        "pattern": "right operand of comma operator has no effect",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Phép toán không có tác dụng",
+        "fix": "Một phần trong câu lệnh của bạn không làm gì cả. Ví dụ: 'i+1;' (tính xong để đó) thay vì 'i=i+1;'."
+    },
+    {
+        "id": "LOG_SEQUENCE",
+        "pattern": "operation on .* may be undefined",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Hành vi không xác định (Undefined Behavior)",
+        "fix": "Bạn đang thay đổi một biến nhiều lần trong cùng một lệnh (ví dụ: 'i = i++'). Kết quả phụ thuộc vào trình biên dịch, không nên dùng."
+    },
+    {
+        "id": "LOG_SHADOW",
+        "pattern": "declaration of .* shadows a parameter",
+        "type": "LOGIC",
+        "msg": "Cảnh báo: Khai báo biến che khuất (Shadowing)",
+        "fix": "Bạn khai báo biến cục bộ trùng tên với tham số hàm hoặc biến toàn cục. Điều này dễ gây nhầm lẫn biến nào đang được dùng."
+    },
+    {
+        "id": "MEM_UNINIT_USE",
+        "pattern": "is used uninitialized",
+        "type": "MEMORY",
+        "msg": "Dùng biến chưa khởi tạo",
+        "fix": "Biến này đang chứa giá trị rác ngẫu nhiên. Hãy gán giá trị ban đầu cho nó (VD: int x = 0;)."
+    },
+    {
+        "id": "MEM_ARRAY_BOUNDS",
+        "pattern": "array subscript .* is above array bounds",
+        "type": "MEMORY",
+        "msg": "Lỗi Tràn mảng (Out of bounds)",
+        "fix": "Bạn đang truy cập chỉ số vượt quá kích thước đã khai báo của mảng. Hãy kiểm tra lại điều kiện vòng lặp."
+    },
+    {
+        "id": "MEM_RET_LOCAL_ADDR",
+        "pattern": "address of local variable .* returned",
+        "type": "MEMORY",
+        "msg": "Trả về địa chỉ biến cục bộ",
+        "fix": "Nguy hiểm: Biến cục bộ sẽ bị hủy khi hàm kết thúc. Đừng return con trỏ hoặc tham chiếu tới nó."
+    },
+    {
+        "id": "MEM_ARRAY_TOO_LARGE",
+        "pattern": "size of array .* is too large",
+        "type": "MEMORY",
+        "msg": "Khai báo mảng quá lớn",
+        "fix": "Kích thước mảng vượt quá dung lượng Stack (thường là vài MB). Hãy dùng cấp phát động (new) hoặc vector."
+    },
+    {
+        "id": "MEM_NULL_DEREF",
+        "pattern": "null pointer dereference",
+        "type": "MEMORY",
+        "msg": "Truy cập con trỏ NULL",
+        "fix": "Bạn đang cố gắng đọc/ghi giá trị tại địa chỉ NULL. Hãy đảm bảo con trỏ đã được cấp phát hoặc gán địa chỉ hợp lệ."
+    },
+    {
+        "id": "MEM_INT_OVERFLOW",
+        "pattern": "integer literal is too large",
+        "type": "MEMORY",
+        "msg": "Tràn số nguyên (Integer Overflow)",
+        "fix": "Kết quả tính toán vượt quá giới hạn của kiểu dữ liệu. Hãy thử dùng kiểu lớn hơn như 'long long', nếu không hãy xem xét sử dụng thư viện số lớn (big integer)."
+    },
+    {
+        "id": "MEM_DELETE_ARRAY",
+        "pattern": "deleting array .* expression",
+        "type": "MEMORY",
+        "msg": "Xóa mảng sai cách",
+        "fix": "Để xóa một mảng cấp phát động, bạn phải dùng 'delete[] p', không phải 'delete p'."
+    },
+    {
+        "id": "MEM_NARROWING",
+        "pattern": "narrowing conversion of",
+        "type": "MEMORY",
+        "msg": "Cảnh báo: Mất dữ liệu khi ép kiểu",
+        "fix": "Bạn đang gán một giá trị lớn (hoặc số thực) vào một biến nhỏ hơn (hoặc số nguyên), gây mất dữ liệu."
+    },
+    {
+        "id": "SYN_UNKNOWN_TYPE",
+        "pattern": "unknown type name",
+        "type": "SYNTAX",
+        "msg": "Tên kiểu không xác định",
+        "fix": "Trình biên dịch không biết kiểu dữ liệu này. Có thể bạn thiếu #include thư viện hoặc sai chính tả tên Class/Struct."
+    },
+    {
+        "id": "MEM_INT_TOO_LARGE",
+        "pattern": "integer constant is too large",
+        "type": "MEMORY",
+        "msg": "Con số quá lớn (Tràn kiểu số nguyên)",
+        "fix": "Con số bạn nhập vượt quá khả năng lưu trữ của kiểu 'long long'. Hãy giảm bớt số hoặc dùng chuỗi (string) để xử lý số lớn."
+    },
+    {
+        "id": "MEM_ARRAY_TOO_LARGE",
+        "pattern": "size of array .* is too large|overflow in constant expression",
+        "type": "MEMORY",
+        "msg": "Kích thước mảng quá lớn (Tràn Stack)",
+        "fix": "Bạn đang khai báo mảng quá lớn gây tràn bộ nhớ Stack. Hãy giảm kích thước hoặc dùng cấp phát động 'new' / 'std::vector'."
+    },
+    {
+        "id": "SYN_MISSING_SEMI",
+        "pattern": "expected\\s*['\"]?[;]['\"]?\\s*(before|after|at end)",
+        "type": "SYNTAX",
+        "msg": "Thiếu dấu chấm phẩy ';'",
+        "fix": "Trong C++, câu lệnh thường phải kết thúc bằng dấu chấm phẩy. Hãy kiểm tra cuối dòng lệnh hiện tại hoặc dòng ngay phía trên."
+    },
+    {
+        "id": "SYN_REDEFINITION",
+        "pattern": "redefinition of\\s*['\"]?([^'\"]+)['\"]?",
+        "type": "SYNTAX",
+        "msg": "Khai báo trùng tên biến/hàm '{1}'",
+        "fix": "Bạn đã khai báo '{1}' hai lần trong cùng một phạm vi. Hãy xóa bớt một dòng hoặc đổi tên khác."
+    },
+    {
+        "id": "SYN_NO_MATCH_FUNC",
+        "pattern": "no matching function for call to\\s*['\"]?([^'\"]+)['\"]?",
+        "type": "LOGIC",
+        "msg": "Gọi hàm '{1}' sai tham số",
+        "fix": "Hàm này không chấp nhận các tham số bạn truyền vào (ví dụ: swap cần biến, không nhận số). Hãy kiểm tra lại."
+    },
+    {
+        "id": "SYN_MISSING_BRACE_CLOSE",
+        "pattern": "expected\\s*['\"]?\\}['\"]?\\s*at end of input",
+        "type": "SYNTAX",
+        "msg": "Thiếu dấu đóng ngoặc nhọn '}'",
+        "fix": "Chương trình kết thúc đột ngột. Có thể bạn đã mở hàm main bằng '{' nhưng quên đóng lại ở cuối file."
+    },
+    {
+        "id": "LOG_DIV_ZERO",
+        "pattern": "division by zero",
+        "type": "LOGIC",
+        "msg": "Lỗi chia cho số 0",
+        "fix": "Phát hiện phép chia cho hằng số 0. Điều này chắc chắn gây crash chương trình. Hãy sửa mẫu số."
+    },
+    {
+        "id": "SYN_UNDECLARED_VAR",
+        "pattern": "['\"]?(.+)['\"]?\\s*was not declared in this scope",
+        "type": "SYNTAX",
+        "msg": "Biến chưa được khai báo",
+        "fix": "Bạn đang dùng biến '{1}' nhưng máy tính chưa biết nó là gì. Hãy kiểm tra lại lỗi chính tả hoặc thêm dòng khai báo (ví dụ: int {1};)."
+    },
+    {
+        "id": "SYN_MAIN_TYPE",
+        "pattern": "::main\\s*must return\\s*['\"]?int['\"]?",
+        "type": "SYNTAX",
+        "msg": "Hàm main khai báo sai kiểu",
+        "fix": "Theo chuẩn C++, hàm main bắt buộc phải trả về 'int'. Hãy sửa 'void main()' thành 'int main()'."
+    },
+    {
+        "id": "SYN_INCLUDE_ERR",
+        "pattern": "(fatal error|no such file).*['\"](.+)['\"]",
+        "type": "SYNTAX",
+        "msg": "Không tìm thấy thư viện",
+        "fix": "Trình biên dịch không tìm thấy file '{2}'. Hãy kiểm tra chính tả (ví dụ: iostream, vector, cmath) và đảm bảo dùng dấu < >."
+    },
+    {
+        "id": "SYN_STD_MISSING",
+        "pattern": "(cout|cin|endl|string|vector)\\s*was not declared",
+        "type": "SYNTAX",
+        "msg": "Thiếu không gian tên std",
+        "fix": "Máy tính không hiểu lệnh này. Hãy thêm 'using namespace std;' sau các dòng #include hoặc dùng 'std::{1}'."
+    },
+    {
+        "id": "SYN_GENERIC",
+        "pattern": "error: (.*)",
+        "type": "SYNTAX",
+        "msg": "Lỗi biên dịch chung",
+        "fix": "Chi tiết lỗi kỹ thuật: {1}. Hãy kiểm tra kỹ dòng này."
+    }
+]

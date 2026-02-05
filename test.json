@@ -1,0 +1,30 @@
+"diagnostic_knowledge": [
+    {
+      "error_id": "P001_E01",
+      "name": "Lỗi Off-by-One (Tràn mảng)",
+      "trigger_rule": "regex(for.*i\\s*<=\\s*n)",
+      "explanation": "Phát hiện lỗi logic: Bạn đang lặp 'i <= n'. Mảng 'n' phần tử có chỉ số từ 0 đến n-1. Vòng lặp của bạn sẽ cố truy cập 'a[n]', gây lỗi tràn mảng (out-of-bounds).",
+      "fix": "Hãy sửa điều kiện lặp của vòng 'for' thành 'i < n'."
+    },
+    {
+      "error_id": "P001_E02",
+      "name": "Lỗi biến chưa khởi tạo",
+      "trigger_rule": "regex(int\\s+max;.*if\\s*\\(\\s*a\\[i\\]\\s*>\\s*max)",
+      "explanation": "Phát hiện lỗi logic: Bạn đã khai báo 'int max;' nhưng không gán giá trị ban đầu. Biến 'max' đang chứa một giá trị rác, khiến phép so sánh đầu tiên bị sai.",
+      "fix": "Hãy khởi tạo giá trị ban đầu cho max ngay sau khi khai báo, ví dụ: 'int max = a[0];'"
+    },
+    {
+      "error_id": "P001_E03",
+      "name": "Sai logic so sánh (Tìm Min thay vì Max)",
+      "trigger_rule": "regex(if\\s*\\(\\s*a\\[i\\]\\s*<\\s*max)",
+      "explanation": "Phát hiện lỗi logic: Bạn đang dùng điều kiện 'a[i] < max'. Logic này dùng để tìm giá trị NHỎ NHẤT (min), không phải LỚN NHẤT (max).",
+      "fix": "Hãy đổi dấu so sánh từ '<' thành '>', ví dụ: 'if (a[i] > max)'."
+    },
+    {
+      "error_id": "P001_E04",
+      "name": "Lỗi lặp thừa (Lặp từ i=0)",
+      "trigger_rule": "regex(max\\s*=\\s*a\\[0\\];.*for.*i\\s*=\\s*0)",
+      "explanation": "Không hẳn là lỗi sai, nhưng code của bạn lặp thừa. Bạn đã gán 'max = a[0]', sau đó lại bắt đầu lặp từ 'i = 0'. Phép so sánh 'a[0] > max' ở vòng lặp đầu tiên là không cần thiết.",
+      "fix": "Để tối ưu, hãy gán 'max = a[0]' và bắt đầu vòng lặp từ 'i = 1'."
+    }
+]

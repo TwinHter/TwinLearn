@@ -1,0 +1,11 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n = 5
+    int b = n / 5;
+    const int c = 10;
+    c = 20;
+    cout << b << endl;
+    return 0;
+}

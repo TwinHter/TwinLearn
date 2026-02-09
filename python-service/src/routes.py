@@ -1,8 +1,8 @@
 from time import time
 from fastapi import APIRouter, HTTPException
 from schemas import AiRequest, AiResponse, AiTaskType
-from services.kb_client import check_syntax, solve_task
-from services.llm_client import llm_check_syntax, llm_solve_exercise
+from services.kb_client import kb_check_syntax, kb_task_solver
+from services.llm_client import llm_check_syntax, llm_task_solver
 
 router = APIRouter(prefix="/ai")
 
@@ -12,17 +12,17 @@ def process_ai(req: AiRequest):
 
     try:
         if req.task_type == AiTaskType.SYNTAX_CHECK:
-            kb_result = check_syntax(req.content)
+            kb_result = kb_check_syntax(req.content)
             llm_result = llm_check_syntax(req.content, req.context)
             result = f"{kb_result}\n{llm_result}"
 
         elif req.task_type == AiTaskType.SOLVE_EXERCISE:
-            kb_result = solve_task(req.content)
-            llm_result = llm_solve_exercise(req.content, req.context)
+            kb_result = kb_task_solver(req.content)
+            llm_result = llm_task_solver(req.content, req.context)
             result = f"{kb_result}\n{llm_result}"
 
         elif req.task_type == AiTaskType.CHAT:
-            result = llm_solve_exercise(req.content, req.context)
+            result = llm_task_solver(req.content, req.context)
 
         else:
             raise HTTPException(status_code=400, detail="Invalid task type")

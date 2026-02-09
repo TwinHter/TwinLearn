@@ -1,27 +1,33 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  db:
-    # Lấy image Postgres chính thức
-    image: postgres:15-alpine
-    
-    restart: always
-    
-    # Các biến môi trường để cấu hình Postgres
-    environment:
-      - POSTGRES_USER=twinhter
-      - POSTGRES_PASSWORD=@Twin24
-      - POSTGRES_DB=cstt_db
-      
-    # Ánh xạ cổng 5432 trên máy  vào cổng 5432 của container
-    ports:
-      - '5432:5432'
-      
-    # "Lưu tất cả dữ liệu bên trong /var/lib/postgresql/data của container vào một ổ đĩa 'postgres_data' trên máy thật"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    app-db:
+        image: postgres:15-alpine
+        container_name: cstt_app_db
+        restart: always
+        environment:
+            POSTGRES_USER: twinhter
+            POSTGRES_PASSWORD: "@Twin24"
+            POSTGRES_DB: cstt_db
+        ports:
+            - "5432:5432"
+        volumes:
+            - cstt_postgres_data:/var/lib/postgresql/data
+
+    ai-db:
+        image: postgres:15-alpine
+        container_name: cstt_ai_db
+        restart: always
+        environment:
+            POSTGRES_USER: ai_user
+            POSTGRES_PASSWORD: ai_pass
+            POSTGRES_DB: ai_kb_db
+        ports:
+            - "5433:5432"
+        volumes:
+            - ai_postgres_data:/var/lib/postgresql/data
 
 volumes:
-  # Định nghĩa ổ đĩa tên là 'postgres_data'
-  # Điều này đảm bảo bạn KHÔNG mất dữ liệu khi tắt/bật container
-  postgres_data:
+    cstt_postgres_data:
+        external: true
+    ai_postgres_data:

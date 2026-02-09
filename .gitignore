@@ -57,7 +57,6 @@ docker-data/
 **/docker-data/
 **/data/
 docker-compose.override.yml
-*.sql
 *.dump
 *.backup
 

@@ -14,7 +14,7 @@
         "fix": "Bạn đang dùng biến '{1}' nhưng máy tính chưa biết nó là gì. Hãy kiểm tra lại lỗi chính tả hoặc thêm dòng khai báo (ví dụ: int {1};)."
     },
     {
-        "id": "SYN_UNDECLARED_VAR",
+        "id": "SYN_UNDECLARED_VAR_2",
         "pattern": "error: use of undeclared identifier ['\"]?(.+)['\"]*",
         "type": "SYNTAX",
         "msg": "Biến chưa được khai báo",
@@ -42,13 +42,6 @@
         "fix": "Kiểm tra các biểu thức điều kiện if(...), while(...) hoặc for(...) xem đã đóng ngoặc đầy đủ chưa. Hãy thêm dấu ')' còn thiếu."
     },
     {
-        "id": "SYN_MAIN_TYPE",
-        "pattern": "::main\\s*must return\\s*['\"]?int['\"]?",
-        "type": "SYNTAX",
-        "msg": "Hàm main khai báo sai kiểu",
-        "fix": "Theo chuẩn C++, hàm main bắt buộc phải trả về 'int'. Hãy sửa 'void main()' thành 'int main()' và thêm 'return 0;' ở cuối. "
-    },
-    {
         "id": "SYN_INCLUDE_ERR",
         "pattern": "(fatal error|no such file).*['\"](.+)['\"]",
         "type": "SYNTAX",
@@ -61,13 +54,6 @@
         "type": "SYNTAX",
         "msg": "Thiếu không gian tên std",
         "fix": "Máy tính không hiểu lệnh này. Hãy thêm 'using namespace std;' sau các dòng #include hoặc dùng 'std::{1}'. "
-    },
-    {
-        "id": "SYN_REDEFINITION",
-        "pattern": "redefinition of\\s*['\"](.+)['\"]",
-        "type": "SYNTAX",
-        "msg": "Khai báo trùng tên biến/hàm",
-        "fix": "Bạn đã khai báo '{1}' hai lần trong cùng một phạm vi. Hãy xóa bớt một dòng hoặc đổi tên khác. "
     },
     {
         "id": "SYN_NOT_DECLARED_TYPE",
@@ -140,7 +126,7 @@
         "fix": "Biến '{1}' được khai báo là 'const' (chỉ đọc/hằng số). Bạn chỉ được gán giá trị cho nó một lần lúc khởi tạo, không thể thay đổi sau đó."
     },
     {
-        "id": "SYN_CONST_ASSIGN",
+        "id": "SYN_CONST_ASSIGN_2",
         "pattern": "assignment of read-only",
         "type": "SYNTAX",
         "msg": "Gán giá trị cho hằng số (const)",
@@ -364,20 +350,6 @@
         "fix": "Con số bạn nhập vượt quá khả năng lưu trữ của kiểu 'long long'. Hãy giảm bớt số hoặc dùng chuỗi (string) để xử lý số lớn."
     },
     {
-        "id": "MEM_ARRAY_TOO_LARGE",
-        "pattern": "size of array .* is too large|overflow in constant expression",
-        "type": "MEMORY",
-        "msg": "Kích thước mảng quá lớn (Tràn Stack)",
-        "fix": "Bạn đang khai báo mảng quá lớn gây tràn bộ nhớ Stack. Hãy giảm kích thước hoặc dùng cấp phát động 'new' / 'std::vector'."
-    },
-    {
-        "id": "SYN_MISSING_SEMI",
-        "pattern": "expected\\s*['\"]?[;]['\"]?\\s*(before|after|at end)",
-        "type": "SYNTAX",
-        "msg": "Thiếu dấu chấm phẩy ';'",
-        "fix": "Trong C++, câu lệnh thường phải kết thúc bằng dấu chấm phẩy. Hãy kiểm tra cuối dòng lệnh hiện tại hoặc dòng ngay phía trên."
-    },
-    {
         "id": "SYN_REDEFINITION",
         "pattern": "redefinition of\\s*['\"]?([^'\"]+)['\"]?",
         "type": "SYNTAX",
@@ -385,28 +357,7 @@
         "fix": "Bạn đã khai báo '{1}' hai lần trong cùng một phạm vi. Hãy xóa bớt một dòng hoặc đổi tên khác."
     },
     {
-        "id": "SYN_NO_MATCH_FUNC",
-        "pattern": "no matching function for call to\\s*['\"]?([^'\"]+)['\"]?",
-        "type": "LOGIC",
-        "msg": "Gọi hàm '{1}' sai tham số",
-        "fix": "Hàm này không chấp nhận các tham số bạn truyền vào (ví dụ: swap cần biến, không nhận số). Hãy kiểm tra lại."
-    },
-    {
-        "id": "SYN_MISSING_BRACE_CLOSE",
-        "pattern": "expected\\s*['\"]?\\}['\"]?\\s*at end of input",
-        "type": "SYNTAX",
-        "msg": "Thiếu dấu đóng ngoặc nhọn '}'",
-        "fix": "Chương trình kết thúc đột ngột. Có thể bạn đã mở hàm main bằng '{' nhưng quên đóng lại ở cuối file."
-    },
-    {
-        "id": "LOG_DIV_ZERO",
-        "pattern": "division by zero",
-        "type": "LOGIC",
-        "msg": "Lỗi chia cho số 0",
-        "fix": "Phát hiện phép chia cho hằng số 0. Điều này chắc chắn gây crash chương trình. Hãy sửa mẫu số."
-    },
-    {
-        "id": "SYN_UNDECLARED_VAR",
+        "id": "SYN_UNDECLARED_VAR_3",
         "pattern": "['\"]?(.+)['\"]?\\s*was not declared in this scope",
         "type": "SYNTAX",
         "msg": "Biến chưa được khai báo",
@@ -418,20 +369,6 @@
         "type": "SYNTAX",
         "msg": "Hàm main khai báo sai kiểu",
         "fix": "Theo chuẩn C++, hàm main bắt buộc phải trả về 'int'. Hãy sửa 'void main()' thành 'int main()'."
-    },
-    {
-        "id": "SYN_INCLUDE_ERR",
-        "pattern": "(fatal error|no such file).*['\"](.+)['\"]",
-        "type": "SYNTAX",
-        "msg": "Không tìm thấy thư viện",
-        "fix": "Trình biên dịch không tìm thấy file '{2}'. Hãy kiểm tra chính tả (ví dụ: iostream, vector, cmath) và đảm bảo dùng dấu < >."
-    },
-    {
-        "id": "SYN_STD_MISSING",
-        "pattern": "(cout|cin|endl|string|vector)\\s*was not declared",
-        "type": "SYNTAX",
-        "msg": "Thiếu không gian tên std",
-        "fix": "Máy tính không hiểu lệnh này. Hãy thêm 'using namespace std;' sau các dòng #include hoặc dùng 'std::{1}'."
     },
     {
         "id": "SYN_GENERIC",

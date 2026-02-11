@@ -14,8 +14,21 @@ class AiRequest(BaseModel):
     content: str
     context: Optional[str] = None
 
-class AiResponse(BaseModel):
+class LlmResponse(BaseModel):
     result: str
     processing_time_ms: float
     error: Optional[str] = None
     ai_model: Optional[str] = None
+    
+class KbTaskSolverResponse(BaseModel):
+    type: int
+    status: str
+    result: str
+    processing_time_ms: float
+    error: Optional[str] = None
+    
+class KbSyntaxCheckResponse(BaseModel):
+    result: str
+    status: str
+    processing_time_ms: float
+    error: Optional[str] = None

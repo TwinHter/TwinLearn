@@ -41,7 +41,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(ai_router, prefix="/api/v1", tags=["Solver"])
+app.include_router(ai_router, prefix="/api", tags=["Solver"])
 
 # Health Check
 @app.get("/")
@@ -49,5 +49,5 @@ async def root():
     return {
         "status": "online", 
         "service": "CSTT Solver API",
-        "env": settings.environment
+        "env": "development"
     }

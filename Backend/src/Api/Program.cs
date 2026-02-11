@@ -1,7 +1,7 @@
 using Application.Mappings;
 using Application.Services;
 using Infrastructure.Services;
-using Core.Interfaces;
+using Application.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -23,21 +23,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
-// builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-// builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
-// builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IGeminiService, GeminiService>();
-// builder.Services.AddScoped<ITopicRepository, TopicRepository>();
-// builder.Services.AddScoped<IChecklistRepository, ChecklistRepository>();
-// builder.Services.AddScoped<ISearchHistoryRepository, SearchHistoryRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITopicRepository, TopicRepository>();
+builder.Services.AddScoped<IChecklistRepository, ChecklistRepository>();
+builder.Services.AddScoped<ISearchHistoryRepository, SearchHistoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddHttpClient<IGeminiService, GeminiService_v2>();
+builder.Services.AddHttpClient<IKbService, KbService_v2>();
 
 builder.Services.AddScoped<ProblemService>();
 builder.Services.AddScoped<TopicService>();
 builder.Services.AddScoped<ChecklistService>();
 builder.Services.AddScoped<HistoryService>();
 builder.Services.AddScoped<AiService>();
-builder.Services.AddScoped<IKbService, KbService>();
+builder.Services.AddScoped<IKbService, KbService_v2>();
 
 builder.Services.AddCors(options =>
 {

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Core.Enums;
 
 namespace Application.DTOs;
 
@@ -7,6 +8,8 @@ public class GeminiRequestDto
 {
     [Required]
     public required string Prompt { get; set; }
+    public string? Context { get; set; }
+    public string TaskType { get; set; } = AiTaskType.SYNTAX_CHECK_LLM;
 }
 
 public class GeminiResponseDto

@@ -1,28 +1,17 @@
 using Application.DTOs;
-using AutoMapper;
-using Core.Interfaces;
+using Application.Interfaces;
+using Core.Enums;
 using Core.Models;
-
 namespace Application.Services;
 
-public class AiService
+public class AiService(IGeminiService geminiService, IKbService kbService)
 {
-    private readonly IMapper _mapper;
-    private readonly IGeminiService _geminiService;
-    private readonly HistoryService _historyService;
-    private readonly IKbService _kbService;
-
-    public AiService(IUnitOfWork unitOfWork, IMapper mapper, IGeminiService geminiService, HistoryService historyService, IKbService kbService)
-    {
-        _historyService = historyService;
-        _mapper = mapper;
-        _geminiService = geminiService;
-        _kbService = kbService;
-    }
-
     public async Task<GeminiResponseDto> GetGeminiResponseAsync(GeminiRequestDto requestDto)
     {
-        var geminiResponse = await _geminiService.GetGeminiResponseAsync(requestDto.Prompt);
+        var geminiResponse = new GeminiServiceResult();
+        if (requestDto.TaskType == AiTaskType.SYNTAX_CHECK_LLM)
+            geminiResponse = await geminiService.CheckSyntaxAsync(requestDto.Prompt);
+        else geminiResponse = await geminiService.TaskSolverAsync(requestDto.Prompt);
         var responseDto = new GeminiResponseDto
         {
             Timestamp = DateTime.UtcNow,
@@ -36,7 +25,7 @@ public class AiService
 
     public async Task<KbFixBugResponseDto> KbFixBugInCodeAsync(KbFixBugRequestDto requestDto)
     {
-        var kbFixBug = await _kbService.AnalyzeCodeSyntax(requestDto.SourceCode);
+        var kbFixBug = await kbService.KbCheckSyntax(requestDto.SourceCode);
         var responseDto = new KbFixBugResponseDto
         {
             Status = kbFixBug.Status,
@@ -48,10 +37,10 @@ public class AiService
 
     public async Task<KbSolverResponseDto> KbSolveProblemAsync(KbSolverRequestDto requestDto)
     {
-        // Chuyển đổi requestDto thành chuỗi JSON
+
         var requestString = System.Text.Json.JsonSerializer.Serialize(requestDto);
 
-        var kbSolver = await _kbService.AnalyzeCodeSolver(requestString);
+        var kbSolver = await kbService.KbTaskSolver(requestString);
         var responseDto = new KbSolverResponseDto
         {
             Status = kbSolver.Status,

@@ -1,64 +1,55 @@
 using Application.DTOs;
 using AutoMapper;
 using Core.Enums;
-using Core.Interfaces;
+using Application.Interfaces;
 using Core.Models;
 
 namespace Application.Services;
 
-public class ProblemService
+public class ProblemService(IUnitOfWork unitOfWork, IMapper mapper)
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-
-    public ProblemService(IUnitOfWork unitOfWork, IMapper mapper)
-    {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
-    }
-
     public async Task<IEnumerable<ProblemDto>> GetAllProblemsAsync()
     {
-        var problemEntities = await _unitOfWork.Problems.GetAllAsync();
-        return _mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
+        var problemEntities = await unitOfWork.Problems.GetAllAsync();
+        return mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
     }
     public async Task<ProblemDto> GetProblemByIdAsync(int id)
     {
-        var problemEntity = await _unitOfWork.Problems.GetProblemByIdAsync(id);
+        var problemEntity = await unitOfWork.Problems.GetProblemByIdAsync(id);
         if (problemEntity == null)
             throw new Exception("Problem không tìm thấy.");
-        return _mapper.Map<ProblemDto>(problemEntity);
+        return mapper.Map<ProblemDto>(problemEntity);
     }
 
     public async Task<IEnumerable<ProblemDto>> GetProblemsByTopicAsync(int topicId)
     {
-        var problemEntities = await _unitOfWork.Problems.GetProblemsByTopicIdAsync(topicId);
-        return _mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
+        var problemEntities = await unitOfWork.Problems.GetProblemsByTopicIdAsync(topicId);
+        return mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
     }
 
     public async Task<IEnumerable<ProblemDto>> GetProblemsByDifficultyAsync(int minDiff, int maxDiff)
     {
-        var problemEntities = await _unitOfWork.Problems.GetProblemsByDifficultyRangeAsync(minDiff, maxDiff);
-        return _mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
+        var problemEntities = await unitOfWork.Problems.GetProblemsByDifficultyRangeAsync(minDiff, maxDiff);
+        return mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
     }
 
     public async Task<IEnumerable<ProblemDto>> GetProblemsByNameAsync(string title)
     {
-        var problemEntities = await _unitOfWork.Problems.GetProblemsByNameAsync(title);
-        return _mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
+        var problemEntities = await unitOfWork.Problems.GetProblemsByNameAsync(title);
+        return mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
     }
 
     public async Task<IEnumerable<ProblemDto>> GetProblemsBySourceAsync(ProblemSource source)
     {
-        var problemEntities = await _unitOfWork.Problems.GetProblemsBySourceAsync(source);
-        return _mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
+        var problemEntities = await unitOfWork.Problems.GetProblemsBySourceAsync(source);
+        return mapper.Map<IEnumerable<ProblemDto>>(problemEntities);
     }
 
 
     public async Task<ProblemDto> CreateProblemAsync(CreateProblemDto createDto)
     {
         // 1. Map các trường đơn giản (Title, Difficulty...)
-        var problemEntity = _mapper.Map<Problem>(createDto);
+        var problemEntity = mapper.Map<Problem>(createDto);
 
         // 2. Logic nghiệp vụ: Xử lý TopicIds (N-N)
         if (createDto.TopicIds != null)
@@ -71,8 +62,8 @@ public class ProblemService
         }
 
         // 3. Lưu vào CSDL
-        await _unitOfWork.Problems.AddAsync(problemEntity);
-        await _unitOfWork.SaveChangesAsync();
+        await unitOfWork.Problems.AddAsync(problemEntity);
+        await unitOfWork.SaveChangesAsync();
 
         // 4. Trả về DTO đầy đủ (Bằng cách gọi lại hàm Get)
         return await GetProblemByIdAsync(problemEntity.Id);
@@ -81,11 +72,11 @@ public class ProblemService
     public async Task<ProblemDto> UpdateProblemAsync(int id, UpdateProblemDto updateDto)
     {
         // 1. Lấy entity gốc (kèm các Topic đang có)
-        var problemEntity = await _unitOfWork.Problems.GetProblemByIdAsync(id);
+        var problemEntity = await unitOfWork.Problems.GetProblemByIdAsync(id);
         if (problemEntity == null)
             throw new Exception("Problem không tìm thấy.");
 
-        _mapper.Map(updateDto, problemEntity);
+        mapper.Map(updateDto, problemEntity);
 
         if (updateDto.TopicIds != null)
         {
@@ -109,25 +100,25 @@ public class ProblemService
                 }
             }
         }
-        await _unitOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
         return await GetProblemByIdAsync(id);
     }
 
     public async Task<bool> DeleteProblemAsync(int id)
     {
-        var problemEntity = await _unitOfWork.Problems.GetByIdAsync(id);
+        var problemEntity = await unitOfWork.Problems.GetByIdAsync(id);
         if (problemEntity == null)
             return false;
 
-        await _unitOfWork.Problems.DeleteAsync(problemEntity);
+        await unitOfWork.Problems.DeleteAsync(problemEntity);
 
-        await _unitOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
         return true;
     }
     public async Task<IEnumerable<ProblemDto>> GetFilteredProblemsAsync(ProblemFilterDto filter)
     {
-        var query = _unitOfWork.Problems.GetQueryable();
+        var query = unitOfWork.Problems.GetQueryable();
 
         if (filter.TopicId.HasValue)
         {
@@ -174,6 +165,6 @@ public class ProblemService
         }
         var problems = query.ToList();
 
-        return _mapper.Map<IEnumerable<ProblemDto>>(problems);
+        return mapper.Map<IEnumerable<ProblemDto>>(problems);
     }
 }

@@ -1,4 +1,4 @@
-using Core.Interfaces;
+using Application.Interfaces;
 using Core.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

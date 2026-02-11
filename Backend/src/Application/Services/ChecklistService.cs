@@ -1,23 +1,15 @@
 using Application.DTOs;
 using AutoMapper;
 using Core.Enums;
-using Core.Interfaces;
+using Application.Interfaces;
 using Core.Models;
 
 
 namespace Application.Services;
 
-public class ChecklistService
+public class ChecklistService(IUnitOfWork unitOfWork, IMapper mapper)
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
     private int? _defaultUserId; // Biến tạm để lưu UserId
-
-    public ChecklistService(IUnitOfWork unitOfWork, IMapper mapper)
-    {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
-    }
 
     private async Task<int> GetDefaultUserIdAsync()
     {
@@ -25,7 +17,7 @@ public class ChecklistService
         if (_defaultUserId.HasValue)
             return _defaultUserId.Value;
 
-        var user = await _unitOfWork.Users.GetByUsernameAsync("default_user");
+        var user = await unitOfWork.Users.GetByUsernameAsync("default_user");
         if (user == null)
             throw new Exception("User mặc định không tồn tại!");
 
@@ -38,9 +30,9 @@ public class ChecklistService
         // 1. Lấy UserId
         var userId = await GetDefaultUserIdAsync();
 
-        var checklistEntities = await _unitOfWork.Checklists.GetChecklistsByUserIdAsync(userId);
+        var checklistEntities = await unitOfWork.Checklists.GetChecklistsByUserIdAsync(userId);
 
-        return _mapper.Map<IEnumerable<ChecklistDto>>(checklistEntities);
+        return mapper.Map<IEnumerable<ChecklistDto>>(checklistEntities);
     }
 
     public async Task<ChecklistDto> CreateChecklistAsync(CreateChecklistDto createDto)
@@ -50,33 +42,33 @@ public class ChecklistService
         if (createDto.ProblemId.HasValue)
         {
             // Thêm .Value ở đây
-            var problemExists = await _unitOfWork.Problems.GetByIdAsync(createDto.ProblemId.Value);
+            var problemExists = await unitOfWork.Problems.GetByIdAsync(createDto.ProblemId.Value);
 
             if (problemExists == null)
                 throw new Exception("Problem không tồn tại.");
 
             // Thêm .Value ở đây
-            var existingItem = await _unitOfWork.Checklists.GetChecklistByProblemIdAsync(userId, createDto.ProblemId.Value);
+            var existingItem = await unitOfWork.Checklists.GetChecklistByProblemIdAsync(userId, createDto.ProblemId.Value);
 
             if (existingItem != null)
                 throw new Exception("Đã có trong checklist.");
         }
 
         // Dùng Mapper để map các trường chung
-        var checklistEntity = _mapper.Map<Checklist>(createDto);
+        var checklistEntity = mapper.Map<Checklist>(createDto);
         checklistEntity.UserId = userId;
         checklistEntity.LastUpdated = DateTime.UtcNow;
         checklistEntity.Status = ChecklistStatus.NotCompleted;
 
-        await _unitOfWork.Checklists.AddAsync(checklistEntity);
-        await _unitOfWork.SaveChangesAsync();
+        await unitOfWork.Checklists.AddAsync(checklistEntity);
+        await unitOfWork.SaveChangesAsync();
         return await GetChecklistByIdAsync(checklistEntity.Id);
     }
 
     public async Task<ChecklistDto> UpdateChecklistAsync(int id, UpdateChecklistDto updateDto)
     {
         var userId = await GetDefaultUserIdAsync();
-        var checklistEntity = await _unitOfWork.Checklists.GetByIdAsync(id);
+        var checklistEntity = await unitOfWork.Checklists.GetByIdAsync(id);
 
         if (checklistEntity == null)
             throw new Exception("Checklist không tồn tại.");
@@ -89,35 +81,35 @@ public class ChecklistService
         }
         checklistEntity.Status = updateDto.Status;
         checklistEntity.LastUpdated = DateTime.UtcNow;
-        await _unitOfWork.Checklists.UpdateAsync(checklistEntity);
+        await unitOfWork.Checklists.UpdateAsync(checklistEntity);
 
-        await _unitOfWork.SaveChangesAsync();
+        await unitOfWork.SaveChangesAsync();
 
-        return _mapper.Map<ChecklistDto>(checklistEntity);
+        return mapper.Map<ChecklistDto>(checklistEntity);
     }
 
     public async Task<ChecklistDto> GetChecklistByIdAsync(int id)
     {
-        var entity = await _unitOfWork.Checklists.GetByIdWithProblemAsync(id);
-        return _mapper.Map<ChecklistDto>(entity);
+        var entity = await unitOfWork.Checklists.GetByIdWithProblemAsync(id);
+        return mapper.Map<ChecklistDto>(entity);
     }
 
     public async Task<bool> DeleteChecklistAsync(int id)
     {
-        var checklistEntity = await _unitOfWork.Checklists.GetByIdAsync(id);
+        var checklistEntity = await unitOfWork.Checklists.GetByIdAsync(id);
 
         if (checklistEntity == null)
             return false;
 
-        await _unitOfWork.Checklists.DeleteAsync(checklistEntity);
-        await _unitOfWork.SaveChangesAsync();
+        await unitOfWork.Checklists.DeleteAsync(checklistEntity);
+        await unitOfWork.SaveChangesAsync();
         return true;
     }
 
     public async Task<IEnumerable<ChecklistDto>> GetChecklistsByStatus(ChecklistStatus status)
     {
         var userId = await GetDefaultUserIdAsync();
-        var checklistEntities = await _unitOfWork.Checklists.GetChecklistsByStatusAsync(status, userId);
-        return _mapper.Map<IEnumerable<ChecklistDto>>(checklistEntities);
+        var checklistEntities = await unitOfWork.Checklists.GetChecklistsByStatusAsync(status, userId);
+        return mapper.Map<IEnumerable<ChecklistDto>>(checklistEntities);
     }
 }

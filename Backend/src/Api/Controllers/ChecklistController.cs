@@ -3,21 +3,15 @@ using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")] 
-public class ChecklistController : ControllerBase
+[Route("api/[controller]")]
+public class ChecklistController(ChecklistService checklistService) : ControllerBase
 {
-    private readonly ChecklistService _checklistService;
-
-    public ChecklistController(ChecklistService checklistService)
-    {
-        _checklistService = checklistService;
-    }
 
     // GET /api/checklist
     [HttpGet]
     public async Task<IActionResult> GetMyChecklist()
     {
-        var checklist = await _checklistService.GetChecklistAsync();
+        var checklist = await checklistService.GetChecklistAsync();
         return Ok(checklist);
     }
 
@@ -25,7 +19,7 @@ public class ChecklistController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddToChecklist([FromBody] CreateChecklistDto createDto)
     {
-        var newChecklistItem = await _checklistService.CreateChecklistAsync(createDto);
+        var newChecklistItem = await checklistService.CreateChecklistAsync(createDto);
         // Trả về 201 Created
         return CreatedAtAction(nameof(GetChecklistById), new { id = newChecklistItem.Id }, newChecklistItem);
     }
@@ -34,7 +28,7 @@ public class ChecklistController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetChecklistById(int id)
     {
-        var item = await _checklistService.GetChecklistByIdAsync(id);
+        var item = await checklistService.GetChecklistByIdAsync(id);
         if (item == null)
             return NotFound();
         return Ok(item);
@@ -44,7 +38,7 @@ public class ChecklistController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateChecklistStatus(int id, [FromBody] UpdateChecklistDto updateDto)
     {
-        var updatedItem = await _checklistService.UpdateChecklistAsync(id, updateDto);
+        var updatedItem = await checklistService.UpdateChecklistAsync(id, updateDto);
         if (updatedItem == null)
             return NotFound("Không tìm thấy checklist item.");
 
@@ -55,9 +49,8 @@ public class ChecklistController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> RemoveFromChecklist(int id)
     {
-        var result = await _checklistService.DeleteChecklistAsync(id);
-        if (!result)
-            return NotFound("Không tìm thấy checklist item.");
+        var result = await checklistService.DeleteChecklistAsync(id);
+        if (!result) return NotFound("Không tìm thấy checklist item.");
 
         return NoContent();
     }

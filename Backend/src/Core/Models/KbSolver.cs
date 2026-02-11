@@ -21,5 +21,7 @@ public class KbSolver
 
     public string Status { get; set; } = string.Empty;
 
+    public double? ProcessingTimeMs { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

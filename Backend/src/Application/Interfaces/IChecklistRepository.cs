@@ -1,7 +1,7 @@
 using Core.Enums;
 using Core.Models;
 
-namespace Core.Interfaces;
+namespace Application.Interfaces;
 
 public interface IChecklistRepository : IGenericRepository<Checklist>
 {

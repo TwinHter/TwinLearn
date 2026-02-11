@@ -1,7 +1,7 @@
 using Core.Models;
 using Core.Enums;
 
-namespace Core.Interfaces;
+namespace Application.Interfaces;
 
 public interface IProblemRepository : IGenericRepository<Problem>
 {

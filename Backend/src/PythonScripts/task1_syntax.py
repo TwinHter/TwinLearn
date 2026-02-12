@@ -105,6 +105,8 @@ else:
     
     kb_data = load_kb()
     raw_log = run_compiler_analysis(student_code)
+    
+    # print(raw_log)
 
     if not raw_log:
         print("✅ Code hoàn hảo! Không tìm thấy lỗi.")

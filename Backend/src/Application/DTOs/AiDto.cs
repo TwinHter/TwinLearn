@@ -19,6 +19,7 @@ public class GeminiResponseDto
     public string? ErrorMessage { get; set; }
     public string? ModelVersionUsed { get; set; }
     public DateTime Timestamp { get; set; }
+    public double? ProcessingTimeMs { get; set; } = 0;
 }
 
 public class KbFixBugRequestDto
@@ -31,6 +32,7 @@ public class KbFixBugResponseDto
     public string Status { get; set; } = string.Empty;
     public string AnalysisResult { get; set; } = string.Empty; // JSON string
     public DateTime CreatedAt { get; set; }
+    public double? ProcessingTimeMs { get; set; } = 0;
 }
 
 public class KbSolverRequestDto
@@ -53,4 +55,5 @@ public class KbSolverResponseDto
     public string Status { get; set; } = string.Empty;
     public string AnalysisResult { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
+    public double? ProcessingTimeMs { get; set; } = 0;
 }

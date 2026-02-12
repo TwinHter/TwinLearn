@@ -11,7 +11,7 @@ public class AiService(IGeminiService geminiService, IKbService kbService)
         var geminiResponse = new GeminiServiceResult();
         if (requestDto.TaskType == AiTaskType.SYNTAX_CHECK_LLM)
             geminiResponse = await geminiService.CheckSyntaxAsync(requestDto.Prompt);
-        else if(requestDto.TaskType == AiTaskType.TASK_SOLVER_LLM)
+        else if (requestDto.TaskType == AiTaskType.TASK_SOLVER_LLM)
             geminiResponse = await geminiService.TaskSolverAsync(requestDto.Prompt);
         else
         {
@@ -28,7 +28,8 @@ public class AiService(IGeminiService geminiService, IKbService kbService)
             ModelVersionUsed = geminiResponse.ModelVersionUsed,
             Response = geminiResponse.ResponseText,
             Status = (geminiResponse.IsSuccess && geminiResponse.ResponseText != string.Empty) ? AiStatusType.SUCCESS : AiStatusType.ERROR,
-            ErrorMessage = geminiResponse.IsSuccess ? null : geminiResponse.ErrorMessage
+            ErrorMessage = geminiResponse.IsSuccess ? null : geminiResponse.ErrorMessage,
+            ProcessingTimeMs = geminiResponse.ProcessingTimeMs
         };
         return responseDto;
     }
@@ -40,7 +41,8 @@ public class AiService(IGeminiService geminiService, IKbService kbService)
         {
             Status = kbFixBug.Status,
             AnalysisResult = kbFixBug.AnalysisResult,
-            CreatedAt = kbFixBug.CreatedAt
+            CreatedAt = kbFixBug.CreatedAt,
+            ProcessingTimeMs = kbFixBug.ProcessingTimeMs
         };
         return responseDto;
     }
@@ -55,7 +57,8 @@ public class AiService(IGeminiService geminiService, IKbService kbService)
         {
             Status = kbSolver.Status,
             AnalysisResult = kbSolver.AnalysisResult,
-            CreatedAt = kbSolver.CreatedAt
+            CreatedAt = kbSolver.CreatedAt,
+            ProcessingTimeMs = kbSolver.ProcessingTimeMs
         };
         return responseDto;
     }

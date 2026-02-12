@@ -1,5 +1,6 @@
 using Application.DTOs;
 using Application.Services;
+using Core.Constants;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -18,9 +19,10 @@ public class AiController(AiService aiService, HistoryService historyService) : 
             EngineResponse = responseDto.Response ?? string.Empty,
             EngineUsed = Core.Enums.EngineType.Gemini,
             SearchDate = responseDto.Timestamp,
+            ProcessingTimeMs = responseDto.ProcessingTimeMs
         });
 
-        if (responseDto.Status == "Error")
+        if (responseDto.Status == AiStatusType.SYSTEM_FAILED)
         {
             return StatusCode(500, responseDto.ErrorMessage);
         }
@@ -39,6 +41,7 @@ public class AiController(AiService aiService, HistoryService historyService) : 
             EngineResponse = responseDto.AnalysisResult,
             EngineUsed = Core.Enums.EngineType.KnowledgeBase,
             SearchDate = responseDto.CreatedAt,
+            ProcessingTimeMs = responseDto.ProcessingTimeMs
         });
         return Ok(responseDto);
     }
@@ -55,6 +58,7 @@ public class AiController(AiService aiService, HistoryService historyService) : 
             EngineResponse = responseDto.AnalysisResult,
             EngineUsed = Core.Enums.EngineType.KnowledgeBase,
             SearchDate = responseDto.CreatedAt,
+            ProcessingTimeMs = responseDto.ProcessingTimeMs
         });
         return Ok(responseDto);
     }

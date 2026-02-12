@@ -9,6 +9,7 @@ public class SearchHistoryDto
     public required string EngineResponse { get; set; }
     public EngineType EngineUsed { get; set; }
     public DateTime SearchDate { get; set; }
+    public double? ProcessingTimeMs { get; set; }
 
 
     // public int? ProblemId { get; set; }
@@ -20,5 +21,6 @@ public class CreateSearchHistoryDto
     public required string EngineResponse { get; set; }
     public EngineType EngineUsed { get; set; }
     public DateTime SearchDate { get; set; }
+    public double? ProcessingTimeMs { get; set; } = 0;
 }
 

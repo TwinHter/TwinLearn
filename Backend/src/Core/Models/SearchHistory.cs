@@ -16,6 +16,8 @@ public class SearchHistory
     public EngineType EngineUsed { get; set; }
     public required DateTime SearchDate { get; set; }
 
+    public double? ProcessingTimeMs { get; set; } = 0;
+
     // Navigation property
     public User? User { get; set; }
 }

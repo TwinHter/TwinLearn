@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Constants;
 
 namespace Core.Models;
 
@@ -12,7 +12,7 @@ public class KbFixBug
     public string AnalysisResult { get; set; } = string.Empty;
 
     // Trạng thái tóm tắt (Clean, HasError, Failed)
-    public string Status { get; set; } = string.Empty;
+    public string Status { get; set; } = AiStatusType.SUCCESS;
 
     public double? ProcessingTimeMs { get; set; }
 

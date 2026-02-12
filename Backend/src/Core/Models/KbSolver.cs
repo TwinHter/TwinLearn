@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Core.Constants;
 
 namespace Core.Models;
 
@@ -19,7 +20,7 @@ public class KbSolver
     [Column(TypeName = "ntext")]
     public string AnalysisResult { get; set; } = string.Empty;
 
-    public string Status { get; set; } = string.Empty;
+    public string Status { get; set; } = AiStatusType.SUCCESS;
 
     public double? ProcessingTimeMs { get; set; }
 

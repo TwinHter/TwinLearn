@@ -1,7 +1,6 @@
-using System;
 using System.Net.Http.Json;
 using Application.Interfaces;
-using Core.Enums;
+using Core.Constants;
 using Core.Models;
 using Infrastructure.Services.Models;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +25,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
             return new KbSolver
             {
                 AnalysisResult = $"Error: {response.StatusCode}",
-                Status = "Error",
+                Status = AiStatusType.SYSTEM_FAILED,
                 Type = -1
             };
         }
@@ -38,7 +37,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
             return new KbSolver
             {
                 AnalysisResult = "KB Service returned null",
-                Status = "Error",
+                Status = AiStatusType.SYSTEM_FAILED,
                 Type = -1
             };
         }
@@ -46,7 +45,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
         return new KbSolver
         {
             AnalysisResult = dto.Error ?? dto.Result,
-            Status = dto.Error != null ? "Error" : dto.Status,
+            Status = dto.Error != null ? AiStatusType.ERROR : dto.Status,
             Type = dto.Type,
             ProcessingTimeMs = dto.ProcessingTimeMs
         };
@@ -68,7 +67,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
             {
                 SourceCode = request,
                 AnalysisResult = $"Error: {response.StatusCode}",
-                Status = "Error",
+                Status = AiStatusType.SYSTEM_FAILED,
             };
         }
 
@@ -80,7 +79,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
             {
                 SourceCode = request,
                 AnalysisResult = "KB Service returned null",
-                Status = "Error",
+                Status = AiStatusType.SYSTEM_FAILED,
             };
         }
 
@@ -88,7 +87,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
         {
             SourceCode = request,
             AnalysisResult = dto.Error ?? dto.Result,
-            Status = dto.Error != null ? "Error" : dto.Status,
+            Status = dto.Error != null ? AiStatusType.ERROR : dto.Status,
             ProcessingTimeMs = dto.ProcessingTimeMs
         };
     }

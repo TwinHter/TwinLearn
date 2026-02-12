@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Enums;
+namespace Core.Constants;
 
 public class AiTaskType
 {

@@ -11,7 +11,6 @@ async def process_llm(req: AiRequest):
     """
     Endpoint chuyên xử lý các task liên quan đến LLM (Gemini, GPT...)
     """
-    start_time = time.perf_counter()
     
     try:
         # Validate Task Type dành riêng cho LLM
@@ -28,7 +27,7 @@ async def process_llm(req: AiRequest):
     except Exception as e:
         return LlmResponse(
             result="",
-            processing_time_ms=(time.perf_counter() - start_time) * 1000,
+            processing_time_ms=0,
             error=str(e)
         )
 
@@ -38,10 +37,7 @@ async def process_kb(req: AiRequest):
     Endpoint chuyên xử lý các task liên quan đến Knowledge Base (Prolog, Rule Engine...)
     Trả về Union vì KB có 2 schema output khác nhau.
     """
-    start_time = time.perf_counter()
-
     try:
-        # Validate Task Type dành riêng cho KB
         if req.task_type == AiTaskType.SYNTAX_CHECK_KB:
             return await kb_check_syntax(req.content)
             
@@ -51,19 +47,12 @@ async def process_kb(req: AiRequest):
         else:
             # Nếu user gửi task của LLM vào endpoint KB -> Báo lỗi
             raise HTTPException(status_code=400, detail=f"Task '{req.task_type}' not supported in /kb endpoint")
-
-    except HTTPException as he:
-        raise he
     except Exception as e:
-        # Xử lý lỗi chung, trả về schema tương ứng với task type (nếu xác định được)
-        # Nếu lỗi quá sớm không biết task nào, trả về default SyntaxResponse lỗi
-        duration = (time.perf_counter() - start_time) * 1000
-        
         if req.task_type == AiTaskType.SOLVE_EXERCISE_KB:
             return KbTaskSolverResponse(
-                result="", status="error", type=0, processing_time_ms=duration, error=str(e)
+                result="", status="error", type=0, processing_time_ms=0, error=str(e)
             )
         
         return KbSyntaxCheckResponse(
-            result="", status="error", processing_time_ms=duration, error=str(e)
+            result="", status="error", processing_time_ms=0, error=str(e)
         )

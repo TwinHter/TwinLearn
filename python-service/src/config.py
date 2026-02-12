@@ -17,6 +17,7 @@ class Settings:
         self.db_user = self._require_env("DB_USER")
         self.db_password = self._require_env("DB_PASSWORD")
         self.llm_api_key = self._require_env("LLM_API_KEY")
+        self.llm_model = os.getenv("LLM_MODEL")
 
         self.syntax_check_prompt = self._load_prompt("syntax_check.txt")
         self.task_solver_prompt = self._load_prompt("task_solver.txt")

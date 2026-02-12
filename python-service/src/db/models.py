@@ -1,4 +1,5 @@
-from typing import List, Optional
+from typing import Any, List, Optional
+from pydantic import PrivateAttr
 from sqlmodel import SQLModel, Field
 from sqlalchemy import Column, String
 from sqlalchemy.dialects.postgresql import ARRAY
@@ -11,6 +12,15 @@ class SyntaxKb(SQLModel, table=True):
     type: Optional[str] = None
     msg: Optional[str] = None
     fix: str
+    
+    _compiled_pattern: Any = PrivateAttr(default=None)
+    @property
+    def compiled_pattern(self):
+        return self._compiled_pattern
+
+    @compiled_pattern.setter
+    def compiled_pattern(self, value):
+        self._compiled_pattern = value
 
 class SolverState(SQLModel, table=True):
     __tablename__ = "solver_state"

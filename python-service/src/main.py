@@ -3,9 +3,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from config import settings
-from db.db import create_db_and_tables, seed_data
+from db.db import create_db_and_tables, seed_data, engine
 from routes import router as ai_router
+from sqlalchemy.orm import sessionmaker
+from cache import KbCache
 
 logging.basicConfig(
     level=logging.INFO, 
@@ -22,7 +23,19 @@ async def lifespan(app: FastAPI):
         logger.info("✅ Database initialized successfully.")
     except Exception as e:
         logger.error(f"❌ Database init failed: {e}")
+        
+    session_factory = sessionmaker(
+        engine, expire_on_commit=False
+    )
     
+    try:
+        with session_factory() as session:
+            KbCache.initialize(session)
+        logger.info("✅ KB Cache initialized successfully.")
+    except Exception as e:
+        logger.exception("❌ Database init failed")
+        raise
+
     yield
     
     logger.info("🛑 Server is shutting down...")

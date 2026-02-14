@@ -8,7 +8,7 @@ public class SearchHistoryController(HistoryService historyService) : Controller
 
     // GET /api/searchhistory?limit=10
     [HttpGet]
-    public async Task<IActionResult> GetMySearchHistory([FromQuery] int limit = 10)
+    public async Task<IActionResult> GetMySearchHistory([FromQuery] int limit = 20)
     {
         var history = await historyService.GetSearchHistoriesAsync();
         return Ok(history.Take(limit));

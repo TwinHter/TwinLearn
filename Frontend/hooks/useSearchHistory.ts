@@ -8,10 +8,9 @@ export function useSearchHistory() {
     return useQuery({
         queryKey: ["searchHistory"],
         queryFn: async () => {
-            const { data } = await apiClient.get<SearchHistory[]>(
-                "/searchhistory"
-            );
-            return data;
+            const { data } =
+                await apiClient.get<SearchHistory[]>("/searchhistory");
+            return data.slice(0, 20);
         },
     });
 }

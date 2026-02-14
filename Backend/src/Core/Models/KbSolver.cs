@@ -18,7 +18,9 @@ public class KbSolver
 
     // Lưu raw string json output nhận được từ Python
     [Column(TypeName = "ntext")]
-    public string AnalysisResult { get; set; } = string.Empty;
+    public string? AnalysisResult { get; set; }
+
+    public string? Error { get; set; }
 
     public string Status { get; set; } = AiStatusType.SUCCESS;
 

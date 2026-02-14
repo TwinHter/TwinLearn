@@ -9,7 +9,9 @@ public class KbFixBug
     public required string SourceCode { get; set; }
 
     [Column(TypeName = "ntext")]
-    public string AnalysisResult { get; set; } = string.Empty;
+    public string? AnalysisResult { get; set; }
+
+    public string? Error { get; set; }
 
     // Trạng thái tóm tắt (Clean, HasError, Failed)
     public string Status { get; set; } = AiStatusType.SUCCESS;

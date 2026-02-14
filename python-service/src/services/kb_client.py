@@ -8,6 +8,7 @@ from schemas import KbSyntaxCheckResponse, KbTaskSolverResponse, SolverRequest
 from services.kb_analysis_compiler_output import analyze_compiler_output
 from services.kb_solver_service import solve
 from enums import TaskStatus
+from cache import KbCache
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +57,7 @@ async def kb_task_solver(problem: str) -> KbTaskSolverResponse:
         request = SolverRequest(**problem_dict)
         
         result: KbTaskSolverResponse = solve(request)
-
+            
         return KbTaskSolverResponse(
             type=result.type,
             status=result.status,

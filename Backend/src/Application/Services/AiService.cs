@@ -42,7 +42,8 @@ public class AiService(IGeminiService geminiService, IKbService kbService)
             Status = kbFixBug.Status,
             AnalysisResult = kbFixBug.AnalysisResult,
             CreatedAt = kbFixBug.CreatedAt,
-            ProcessingTimeMs = kbFixBug.ProcessingTimeMs
+            ProcessingTimeMs = kbFixBug.ProcessingTimeMs,
+            Error = kbFixBug.Error
         };
         return responseDto;
     }
@@ -52,13 +53,15 @@ public class AiService(IGeminiService geminiService, IKbService kbService)
 
         var requestString = System.Text.Json.JsonSerializer.Serialize(requestDto);
 
+        // Console.WriteLine("Serialized KbSolver Request: " + requestString);
         var kbSolver = await kbService.KbTaskSolver(requestString);
         var responseDto = new KbSolverResponseDto
         {
             Status = kbSolver.Status,
             AnalysisResult = kbSolver.AnalysisResult,
             CreatedAt = kbSolver.CreatedAt,
-            ProcessingTimeMs = kbSolver.ProcessingTimeMs
+            ProcessingTimeMs = kbSolver.ProcessingTimeMs,
+            Error = kbSolver.Error
         };
         return responseDto;
     }

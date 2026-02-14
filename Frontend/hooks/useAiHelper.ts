@@ -2,55 +2,58 @@
 
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "../lib/axios-client";
-import type {
-    AiRequest,
-    AiResponse,
-    KbFixBugResponse,
-    AnalysisParsedResult,
-    KbFixBugRequest,
-} from "../lib/types";
 import {
-    AnalysisResultParsed,
+    GeminiRequest,
+    GeminiResponse,
+    KbFixBugRequest,
+    KbFixBugResponse,
     KbSolverRequest,
-    KbSolverResponseRaw,
-} from "../lib/kb-data";
+    KbSolverResponse,
+    ParsedFixBugAnalysis,
+    KbFixBugItem,
+    ParsedSolverAnalysis,
+} from "../lib/ai-types";
 
 export function useAnalyzeCode() {
     return useMutation({
-        mutationFn: async (request: AiRequest) => {
-            const { data } = await apiClient.post("/ai/gemini", request);
-            return data as AiResponse;
+        mutationFn: async (request: GeminiRequest) => {
+            const { data } = await apiClient.post<GeminiResponse>(
+                "/ai/gemini",
+                request,
+            );
+            return data;
         },
     });
 }
 
 export function useKbFixBug() {
-    return useMutation<AnalysisParsedResult, Error, KbFixBugRequest>({
+    // Đổi AnalysisParsedResult -> ParsedFixBugAnalysis
+    return useMutation<ParsedFixBugAnalysis, Error, KbFixBugRequest>({
         mutationFn: async (request: KbFixBugRequest) => {
             const { data } = await apiClient.post<KbFixBugResponse>(
                 "/ai/kb-fix-bug",
-                request
+                request,
             );
 
             try {
-                if (!data.analysisResult) {
-                    throw new Error(
-                        "Không nhận được kết quả phân tích từ server"
-                    );
-                }
-
-                const parsedResult: AnalysisParsedResult = JSON.parse(
-                    data.analysisResult
-                );
-                console.log("Parsed AI Response:", parsedResult);
-                return parsedResult;
+                console.log("Raw AI Response:", data);
+                const parsedResult = JSON.parse(
+                    data.analysisResult,
+                ) as KbFixBugItem[];
+                return {
+                    ...data,
+                    analysisResult: parsedResult,
+                    error: data.error,
+                } as ParsedFixBugAnalysis;
             } catch (error) {
                 console.error("Lỗi parse JSON từ AI Response:", error);
-
                 return {
-                    status: "Failed",
+                    status: "SystemFailed",
                     raw_log: data.analysisResult || "Lỗi Server",
-                } as AnalysisParsedResult;
+                    error: data.error,
+                    createdAt: data.createdAt,
+                    processingTimeMs: data.processingTimeMs,
+                } as ParsedFixBugAnalysis;
             }
         },
         onError: (error) => {
@@ -60,30 +63,41 @@ export function useKbFixBug() {
 }
 
 export function useKbSolver() {
-    return useMutation<AnalysisResultParsed, Error, KbSolverRequest>({
+    return useMutation<ParsedSolverAnalysis, Error, KbSolverRequest>({
         mutationFn: async (payload: KbSolverRequest) => {
-            // Lưu ý: Endpoint thường là /ai/kb-solver nếu apiClient đã có baseURL
-            const { data } = await apiClient.post<KbSolverResponseRaw>(
+            const { data } = await apiClient.post<KbSolverResponse>(
                 "/ai/kb-solver",
-                payload
+                payload,
             );
 
-            // Kiểm tra dữ liệu thô
-            if (!data.analysisResult) {
-                throw new Error("Không nhận được kết quả phân tích từ server.");
-            }
-
-            // Parse JSON lồng nhau (String -> Object)
             try {
-                const parsedResult: AnalysisResultParsed = JSON.parse(
-                    data.analysisResult
-                );
-                return parsedResult;
-            } catch (parseError) {
-                console.error("JSON Parse Error:", parseError);
-                throw new Error(
-                    "Dữ liệu trả về từ Python không đúng định dạng JSON."
-                );
+                console.log("Raw Solver AI Response:", data);
+                let steps: { id: string; description: string }[] = [];
+
+                try {
+                    const parsed = JSON.parse(data.analysisResult);
+                    if (Array.isArray(parsed)) {
+                        steps = parsed;
+                    }
+                } catch (error) {}
+                console.log("Parsed Steps:", steps);
+
+                return {
+                    ...data,
+                    processingTimeMs: data.processingTimeMs,
+                    createdAt: data.createdAt,
+                    type: payload.type,
+                    steps,
+                    error: data.error,
+                } as ParsedSolverAnalysis;
+            } catch (error) {
+                return {
+                    status: "SystemFailed",
+                    type: payload.type,
+                    error: "Lỗi phân tích kết quả từ AI",
+                    createdAt: data.createdAt,
+                    processingTimeMs: data.processingTimeMs,
+                } as ParsedSolverAnalysis;
             }
         },
         onError: (error) => {

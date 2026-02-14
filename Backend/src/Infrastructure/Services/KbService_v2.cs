@@ -24,7 +24,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
         {
             return new KbSolver
             {
-                AnalysisResult = $"Error: {response.StatusCode}",
+                Error = $"Error: {response.StatusCode}",
                 Status = AiStatusType.SYSTEM_FAILED,
                 Type = -1
             };
@@ -36,7 +36,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
         {
             return new KbSolver
             {
-                AnalysisResult = "KB Service returned null",
+                Error = "KB Service returned null",
                 Status = AiStatusType.SYSTEM_FAILED,
                 Type = -1
             };
@@ -44,8 +44,9 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
 
         return new KbSolver
         {
-            AnalysisResult = dto.Error ?? dto.Result,
-            Status = dto.Error != null ? AiStatusType.ERROR : dto.Status,
+            AnalysisResult = dto.Result ?? "",
+            Error = dto.Error,
+            Status = dto.Status,
             Type = dto.Type,
             ProcessingTimeMs = dto.ProcessingTimeMs
         };
@@ -66,7 +67,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
             return new KbFixBug
             {
                 SourceCode = request,
-                AnalysisResult = $"Error: {response.StatusCode}",
+                Error = $"Error: {response.StatusCode}",
                 Status = AiStatusType.SYSTEM_FAILED,
             };
         }
@@ -78,7 +79,7 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
             return new KbFixBug
             {
                 SourceCode = request,
-                AnalysisResult = "KB Service returned null",
+                Error = "KB Service returned null",
                 Status = AiStatusType.SYSTEM_FAILED,
             };
         }
@@ -86,8 +87,9 @@ public class KbService_v2(HttpClient httpClient, IConfiguration configuration) :
         return new KbFixBug
         {
             SourceCode = request,
-            AnalysisResult = dto.Error ?? dto.Result,
-            Status = dto.Error != null ? AiStatusType.ERROR : dto.Status,
+            AnalysisResult = dto.Result ?? "",
+            Error = dto.Error,
+            Status = dto.Status,
             ProcessingTimeMs = dto.ProcessingTimeMs
         };
     }

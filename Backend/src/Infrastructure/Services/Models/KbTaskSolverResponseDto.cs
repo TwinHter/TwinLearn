@@ -11,8 +11,8 @@ internal class KbTaskSolverResponseDto
     [JsonPropertyName("status")]
     public string Status { get; set; } = "";
 
-    [JsonPropertyName("result")]
-    public string Result { get; set; } = "";
+    [JsonPropertyName("steps")]
+    public string? Result { get; set; } = "";
 
     [JsonPropertyName("processing_time_ms")]
     public double ProcessingTimeMs { get; set; }

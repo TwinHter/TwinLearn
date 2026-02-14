@@ -1,5 +1,6 @@
+import json
 from typing import Dict, List, Set, Any
-from schemas import SolverRequest, KbTaskSolverResponse, StepDetail
+from schemas import SolverRequest, KbTaskSolverResponse
 from cache import KbCache
 from enums import TaskStatus
 
@@ -32,6 +33,7 @@ def solve(request: SolverRequest) -> KbTaskSolverResponse:
     except RuntimeError:
         return KbTaskSolverResponse(type=request.type, status=TaskStatus.ERROR, error="Knowledge Base not initialized", processing_time_ms=0.0)
 
+
     if request.type == 1:
         achieved = set(request.initial_state)
         plan = []
@@ -51,14 +53,15 @@ def solve(request: SolverRequest) -> KbTaskSolverResponse:
                 status=TaskStatus.ERROR,
                 error="Cannot find solution path", 
                 processing_time_ms=0.0
-                
             )
         
         # Map object Step sang model StepDetail để trả về
         result_steps = [
             {"id": step.id, "description": step.description} for step in plan
         ]
-        return KbTaskSolverResponse(type=1, status=TaskStatus.SUCCESS, steps=str(result_steps), processing_time_ms=0.0)
+        steps_json_string = json.dumps(result_steps, ensure_ascii=False)
+        # print(f"Generated Plan: {result_steps}")
+        return KbTaskSolverResponse(type=1, status=TaskStatus.SUCCESS, steps=steps_json_string, processing_time_ms=0.0)
     
     elif request.type == 2:
         current_state = set(request.initial_state)
@@ -95,7 +98,7 @@ def solve(request: SolverRequest) -> KbTaskSolverResponse:
                 processing_time_ms=0.0
             )
 
-        return KbTaskSolverResponse(type=2, status=TaskStatus.SUCCESS, error="Solution is valid", processing_time_ms=0.0)
+        return KbTaskSolverResponse(type=2, status=TaskStatus.SUCCESS, error="", steps="", processing_time_ms=0.0)
 
     else:
         return KbTaskSolverResponse(type=-1, status=TaskStatus.SYSTEM_FAILED, error="Invalid request type", processing_time_ms=0.0)

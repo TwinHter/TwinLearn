@@ -30,9 +30,10 @@ public class KbFixBugRequestDto
 public class KbFixBugResponseDto
 {
     public string Status { get; set; } = string.Empty;
-    public string AnalysisResult { get; set; } = string.Empty; // JSON string
+    public string? AnalysisResult { get; set; } = string.Empty; // JSON string
     public DateTime CreatedAt { get; set; }
     public double? ProcessingTimeMs { get; set; } = 0;
+    public string? Error { get; set; }
 }
 
 public class KbSolverRequestDto
@@ -53,7 +54,8 @@ public class KbSolverRequestDto
 public class KbSolverResponseDto
 {
     public string Status { get; set; } = string.Empty;
-    public string AnalysisResult { get; set; } = string.Empty;
+    public string? AnalysisResult { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public double? ProcessingTimeMs { get; set; } = 0;
+    public string? Error { get; set; }
 }

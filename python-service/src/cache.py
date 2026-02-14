@@ -25,7 +25,6 @@ class KbCache:
             cls._syntax_rules = result.scalars().all()
 
             for rule in cls._syntax_rules:
-                # Thêm try/except để tránh crash nếu regex trong DB bị sai cú pháp
                 try:
                     rule.compiled_pattern = re.compile(rule.pattern, re.IGNORECASE)
                 except Exception as e:

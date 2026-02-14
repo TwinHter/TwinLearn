@@ -33,13 +33,14 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddHttpClient<IGeminiService, GeminiService_v2>();
 builder.Services.AddHttpClient<IKbService, KbService_v2>();
+builder.Services.AddHttpClient<IMetadataRepository, MetadataRepository>();
 
 builder.Services.AddScoped<ProblemService>();
 builder.Services.AddScoped<TopicService>();
 builder.Services.AddScoped<ChecklistService>();
 builder.Services.AddScoped<HistoryService>();
 builder.Services.AddScoped<AiService>();
-builder.Services.AddScoped<IKbService, KbService_v2>();
+builder.Services.AddScoped<MetadataService>();
 
 builder.Services.AddCors(options =>
 {

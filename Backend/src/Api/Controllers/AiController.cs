@@ -38,7 +38,7 @@ public class AiController(AiService aiService, HistoryService historyService) : 
         await historyService.CreateSearchHistoryAsync(new CreateSearchHistoryDto
         {
             UserInput = requestDto.SourceCode,
-            EngineResponse = responseDto.AnalysisResult,
+            EngineResponse = responseDto.AnalysisResult ?? responseDto.Error ?? string.Empty,
             EngineUsed = Core.Enums.EngineType.KnowledgeBase,
             SearchDate = responseDto.CreatedAt,
             ProcessingTimeMs = responseDto.ProcessingTimeMs

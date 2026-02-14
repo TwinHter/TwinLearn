@@ -18,7 +18,7 @@ public class SearchHistoryDto
 public class CreateSearchHistoryDto
 {
     public required string UserInput { get; set; }
-    public required string EngineResponse { get; set; }
+    public string? EngineResponse { get; set; }
     public EngineType EngineUsed { get; set; }
     public DateTime SearchDate { get; set; }
     public double? ProcessingTimeMs { get; set; } = 0;

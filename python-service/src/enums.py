@@ -2,9 +2,9 @@
 from enum import Enum
 
 class TaskStatus(str, Enum):
-    SUCCESS = "success"             # Mọi thứ OK
-    ERROR = "error"                 # Lỗi do input hoặc logic (VD: sai bước)
-    SYSTEM_FAILED = "system_failed" # Lỗi crash server
+    SUCCESS = "Success"             # Mọi thứ OK
+    ERROR = "Error"                 # Lỗi do input hoặc logic (VD: sai bước)
+    SYSTEM_FAILED = "SystemFailed" # Lỗi crash server
     
 class AiTaskType(str, Enum):
     SYNTAX_CHECK_KB = "syntax_check_kb"

@@ -64,7 +64,7 @@ def seed_data():
         # --- SEED SOLVER PROBLEM ---
         if not session.exec(select(SolverProblem)).first():
             logger.info("Bảng SolverProblem rỗng. Đang nạp dữ liệu...")
-            problems = solver_kb.get("problems", [])
+            problems = solver_kb.get("PROBLEMS", [])
             if problems:
                 for item in problems:
                     session.add(SolverProblem(**item))

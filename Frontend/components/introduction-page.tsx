@@ -37,7 +37,7 @@ export default function IntroductionPage({
             <section className="py-24 text-center px-6">
                 <div className="max-w-3xl mx-auto">
                     <h1 className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent mb-6">
-                        CodeWithCSTT
+                        TwinLearn
                     </h1>
                     <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
                         Nền tảng học lập trình cạnh tranh giúp bạn rèn luyện kỹ
@@ -87,7 +87,7 @@ export default function IntroductionPage({
                                         {description}
                                     </p>
                                 </div>
-                            )
+                            ),
                         )}
                     </div>
                 </div>

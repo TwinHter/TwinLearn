@@ -86,7 +86,7 @@ export default function ProblemsPage() {
             {/* Header */}
             <div className="mb-8">
                 <h2 className="text-3xl font-bold tracking-tight mb-2">
-                    Bài toán
+                    Problems
                 </h2>
             </div>
 

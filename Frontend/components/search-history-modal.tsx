@@ -103,7 +103,7 @@ export default function SearchHistoryModal({
                         {/* Section Câu hỏi */}
                         <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
                             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                                Câu hỏi
+                                Your Question
                             </h3>
                             <p className="whitespace-pre-wrap leading-relaxed text-slate-800 font-medium">
                                 {selectedItem.userInput}
@@ -114,7 +114,7 @@ export default function SearchHistoryModal({
                         <div>
                             <div className="flex items-center justify-between mb-3">
                                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                                    AI Phản hồi
+                                    AI Response
                                 </h3>
                                 <span
                                     className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${
@@ -188,7 +188,7 @@ export default function SearchHistoryModal({
                 <div className="flex justify-between items-center p-5 border-b border-slate-100 bg-slate-50/50 shrink-0">
                     <div>
                         <h2 className="text-xl font-bold text-slate-800">
-                            Lịch sử hỏi AI
+                            AI Search History
                         </h2>
                         <p className="text-sm text-slate-500 mt-0.5">
                             Xem lại các câu hỏi và câu trả lời trước đây

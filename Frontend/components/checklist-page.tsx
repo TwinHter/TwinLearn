@@ -20,7 +20,7 @@ export default function ChecklistPage() {
         "all" | "completed" | "incomplete"
     >("all");
     const [selectedProblem, setSelectedProblem] = useState<Problem | null>(
-        null
+        null,
     );
     const updateChecklistItem = useUpdateChecklistItem();
     const deleteChecklistItem = useDeleteChecklistItem();
@@ -62,7 +62,7 @@ export default function ChecklistPage() {
             <div className="flex-1 p-10 overflow-y-auto">
                 <div className="mb-10">
                     <h2 className="text-3xl font-bold mb-2 text-blue-700">
-                        Checklist của tôi
+                        My Checklist
                     </h2>
                     <p className="text-muted-foreground text-sm">
                         Quản lý danh sách công việc luyện tập lập trình
@@ -171,8 +171,8 @@ export default function ChecklistPage() {
                                 {filterMode === "all"
                                     ? "Chưa có nhiệm vụ nào. Hãy thêm một cái!"
                                     : filterMode === "completed"
-                                    ? "Chưa hoàn thành nhiệm vụ nào."
-                                    : "Không có nhiệm vụ chưa làm."}
+                                      ? "Chưa hoàn thành nhiệm vụ nào."
+                                      : "Không có nhiệm vụ chưa làm."}
                             </div>
                         )}
                     </div>

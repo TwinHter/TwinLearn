@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# 💻 TwinLearn - Frontend Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This module contains the user interface for **TwinLearn**, built with **React (TypeScript), **Vite** and **TanStack Query\*\*.
 
-Currently, two official plugins are available:
+## 📸 Screenshots & Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1️⃣ Introduction
 
-## React Compiler
+A comprehensive **Dashboard interface** that introduces the platform and provides quick access shortcuts to main features.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+![Introduction Page Screenshot](../docs/introduction.png)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2️⃣ Problems (Exercise Bank)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+A curated list of **C++ programming exercises** categorized by difficulty.  
+Students can view problem statements and practice coding.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+![Problems Page Screenshot](../docs/problem-list.png)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3️⃣ Checklist (Progress Tracking)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+An interactive **Checklist tool** allowing students to mark mastered C++ concepts (e.g., Pointers, OOP, Recursion), effectively managing their learning path.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+![Checklist Page Screenshot](../docs/checklist.png)
+
+---
+
+### 4️⃣ AI Search History
+
+Centralized storage for all AI interactions.  
+Users can review past **Syntax Checks** or solved logical problems (**Task Solver**) to learn from previous sessions.
+
+![History Page Screenshot]![Checklist Page Screenshot](../docs/search-history-brief.png)
+
+---
+
+### 5️⃣ AI Helper
+
+Consisting of two powerful modes:
+
+#### 🔎 Syntax Checker
+
+- Analyzes C++ syntax errors
+  ![KB Check Syntax](../docs/kb-syntax.png)
+
+#### 🔎 Task Solver
+
+**Guide Mode**
+
+- Visualizes step-by-step algorithms for logical problems.
+- Have LLM Mode and Knowledge Based mode.
+  ![KB Task Solver (Guide Mode)](../docs/kb-solver-guide.png)
+
+**Practice Mode**
+
+- Students design their own solution workflow
+- AI validates and grades the solution
+  ![KB Task Solver (Practice Mode)](../docs/kb-solver-practice.png)
+
+#### LLM Mode
+
+- Leverages Generative AI to provide natural language explanations and context-aware assistance
+
+![LLM Screenshot](../docs/llm.png)

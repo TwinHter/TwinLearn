@@ -21,12 +21,12 @@ The system is built using a **Microservices-lite architecture** with a Database-
 - **Interactive Checklists:** Enables users to build and track to visualize progress.
 - **Curated Problem Bank:** A structured database of C++ exercises ranging from beginner to advanced levels.
 
-Note: For more details, see [Slide](./dpcs/CSTT.pdf)
+Note: For more details, see [Slide](./docs/CSTT.pdf)
 
 ## **🛠️ Tech Stack**
 
-- **Frontend:** ReactTS, Tailwind CSS, TanStack Query. ([More Detail](./frontend/README.md))
-- **Core Backend:** **.NET 9 Web API**, Clean Architecture, Entity Framework Core, AutoMapper. ([More Detail](./backend/README.md))
+- **Frontend:** ReactTS, Tailwind CSS, TanStack Query. ([More Detail](./Frontend/README.md))
+- **Core Backend:** **.NET 9 Web API**, Clean Architecture, Entity Framework Core, AutoMapper. ([More Detail](./Backend/README.md))
 - **AI Service:** Python FastAPI, SQLModel ([More Detail](./python-service/README.md))
 - **Database:** PostgreSQL (through Docker).
 
